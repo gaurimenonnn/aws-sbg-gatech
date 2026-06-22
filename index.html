@@ -3,596 +3,663 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AWS Student Builder Group at Georgia Tech</title>
+<title>GT AWS Student Builder Group</title>
 <style>
   :root {
-    --bg-primary: #0d1117;
-    --bg-secondary: #161b22;
-    --bg-card: #1c2333;
-    --bg-card-hover: #212840;
-    --blue-primary: #4f9ef8;
-    --blue-light: #79b8ff;
-    --blue-dim: #1f3a5f;
-    --blue-glow: rgba(79, 158, 248, 0.15);
-    --blue-border: rgba(79, 158, 248, 0.3);
-    --text-primary: #e6edf3;
-    --text-secondary: #8b949e;
-    --text-muted: #484f58;
+    --background: #16171a;
+    --foreground: #e8ecf2;
+    --card: #1e1f26;
+    --card-foreground: #e8ecf2;
+    --secondary: #1c1d22;
+    --muted: #232430;
+    --muted-foreground: #8a8fa6;
     --border: rgba(255,255,255,0.08);
-    --border-hover: rgba(79, 158, 248, 0.4);
-    --gold: #f0c040;
+    --primary: #b460ef;
+    --accent: #38d9f5;
+    --destructive: #d4183d;
+    --gradient: linear-gradient(135deg, #b460ef 0%, #38d9f5 100%);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Amazon Ember', 'Helvetica Neue', Arial, sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
     line-height: 1.6;
     overflow-x: hidden;
+  }
+
+  .gradient-text {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   /* ── NAV ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(13, 17, 23, 0.92);
+    z-index: 50;
+    background: rgba(22, 23, 26, 0.85);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
+    transition: all 0.3s;
+  }
+
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
   }
 
   .nav-logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     text-decoration: none;
   }
 
   .nav-logo-icon {
-    width: 36px;
-    height: 36px;
-    background: var(--bg-card);
-    border: 1px solid var(--blue-border);
-    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--gradient);
   }
 
-  .nav-logo-icon svg {
-    width: 20px;
-    height: 20px;
-    fill: var(--blue-primary);
-  }
+  .nav-logo-icon svg { width: 16px; height: 16px; fill: #16171a; }
 
   .nav-logo-text {
-    font-size: 15px;
     font-weight: 700;
-    color: var(--text-primary);
+    font-size: 14px;
     letter-spacing: -0.2px;
-  }
-
-  .nav-logo-sub {
-    font-size: 11px;
-    color: var(--text-secondary);
-    font-weight: 400;
-    display: block;
-    line-height: 1.2;
+    color: #fff;
   }
 
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 28px;
     list-style: none;
   }
 
   .nav-links a {
-    color: var(--text-secondary);
+    color: rgba(255,255,255,0.7);
     text-decoration: none;
-    font-size: 14px;
-    padding: 8px 16px;
-    border-radius: 6px;
-    transition: color 0.2s, background 0.2s;
+    font-size: 13.5px;
+    transition: color 0.2s;
   }
 
-  .nav-links a:hover {
-    color: var(--text-primary);
-    background: rgba(255,255,255,0.05);
-  }
-
-  .nav-links a.active {
-    color: var(--blue-primary);
-  }
+  .nav-links a:hover { color: #fff; }
 
   .nav-cta {
-    background: linear-gradient(135deg, #1a6bbd, #4f9ef8);
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 13.5px;
+    font-weight: 600;
     color: #fff !important;
-    padding: 8px 20px !important;
-    border-radius: 6px !important;
-    font-weight: 600 !important;
-    transition: opacity 0.2s, transform 0.15s !important;
+    background: var(--gradient);
+    transition: opacity 0.2s, transform 0.15s;
   }
 
-  .nav-cta:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-    background: rgba(255,255,255,0.05) !important;
+  .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .nav-mobile-toggle {
+    display: none;
+    color: rgba(255,255,255,0.7);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 880px) {
+    .nav-links { display: none; }
+    .nav-mobile-toggle { display: block; }
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-filled {
+    background: var(--gradient);
+    color: #16171a;
+  }
+
+  .btn-filled:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(180,96,239,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.05);
+    transform: translateY(-2px);
   }
 
   /* ── HERO ── */
-  #home {
+  #hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 120px 2rem 80px;
-    position: relative;
     overflow: hidden;
+    padding-top: 56px;
   }
 
-  .hero-bg {
+  .hero-glow {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(79,158,248,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 30% at 80% 80%, rgba(24,82,158,0.08) 0%, transparent 60%);
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(180,96,239,0.09) 0%, rgba(56,217,245,0.06) 40%, transparent 70%);
+    pointer-events: none;
   }
 
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(79,158,248,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(79,158,248,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%);
+  .hero-inner {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 4rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  @media (max-width: 960px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
   }
 
   .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--blue-glow);
-    border: 1px solid var(--blue-border);
-    color: var(--blue-light);
-    font-size: 13px;
-    font-weight: 500;
-    padding: 6px 16px;
+    background: rgba(180,96,239,0.08);
+    border: 1px solid rgba(180,96,239,0.25);
+    color: #d9b3f7;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
     border-radius: 100px;
-    margin-bottom: 2rem;
-    position: relative;
+    margin-bottom: 1.75rem;
   }
 
   .hero-badge-dot {
     width: 6px; height: 6px;
-    background: var(--blue-primary);
     border-radius: 50%;
-    animation: pulse 2s infinite;
+    background: var(--accent);
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-
-  h1 {
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -1px;
+  .hero-inner h1 {
+    font-size: clamp(2.4rem, 5vw, 4.25rem);
+    font-weight: 700;
+    line-height: 1.08;
     margin-bottom: 1.5rem;
-    position: relative;
-  }
-
-  .hero-gradient-text {
-    background: linear-gradient(135deg, #79b8ff 0%, #4f9ef8 40%, #a5d6f8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #fff;
   }
 
   .hero-sub {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: var(--text-secondary);
-    max-width: 560px;
-    margin: 0 auto 2.5rem;
+    color: rgba(255,255,255,0.55);
+    font-size: 1rem;
     line-height: 1.7;
-    position: relative;
+    max-width: 32rem;
+    margin-bottom: 2rem;
   }
 
   .hero-actions {
     display: flex;
-    gap: 16px;
     flex-wrap: wrap;
-    justify-content: center;
-    position: relative;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
   }
 
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #1a6bbd 0%, #4f9ef8 100%);
-    color: #fff;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-    padding: 13px 28px;
-    border-radius: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: none;
-    cursor: pointer;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(79,158,248,0.35);
-  }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    color: var(--text-primary);
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 13px 28px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    transition: border-color 0.2s, background 0.2s, transform 0.2s;
-    cursor: pointer;
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--blue-border);
-    background: var(--blue-glow);
-    transform: translateY(-2px);
-  }
-
-  .hero-stats {
+  .hero-checklist {
     display: flex;
-    gap: 48px;
-    justify-content: center;
-    margin-top: 5rem;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero-checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .hero-checklist-item svg {
+    width: 16px; height: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .hero-checklist-item span {
+    color: rgba(255,255,255,0.65);
+    font-size: 13.5px;
+  }
+
+  .hero-visual {
     position: relative;
-    flex-wrap: wrap;
+    aspect-ratio: 4/5;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
   }
 
-  .hero-stat {
-    text-align: center;
-  }
-
-  .hero-stat-num {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--blue-primary);
+  .hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
   }
 
-  .hero-stat-label {
-    font-size: 13px;
-    color: var(--text-secondary);
+  .hero-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(22,23,26,0.85) 0%, transparent 50%);
+  }
+
+  .hero-visual-card {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    z-index: 2;
+  }
+
+  .hero-visual-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .hero-visual-card-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
   }
 
   /* ── SECTION BASE ── */
-  section { padding: 100px 2rem; }
+  section { padding: 7rem 1.5rem; position: relative; }
+  .section-inner { max-width: 1280px; margin: 0 auto; }
 
-  .section-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .section-label {
+  .eyebrow {
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--blue-primary);
-    margin-bottom: 12px;
-  }
-
-  .section-title {
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    font-weight: 800;
-    line-height: 1.2;
+    letter-spacing: 0.12em;
+    color: var(--accent);
     margin-bottom: 1rem;
-    letter-spacing: -0.5px;
   }
 
-  .section-desc {
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-    max-width: 600px;
-    line-height: 1.8;
-  }
-
-  /* ── ABOUT ── */
-  #about { background: var(--bg-secondary); }
-
-  .about-grid {
+  .section-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 64px;
-    align-items: start;
-    margin-top: 60px;
+    align-items: center;
   }
 
-  @media (max-width: 768px) {
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .team-grid { grid-template-columns: 1fr 1fr !important; }
-    nav { padding: 0 1rem; }
-    .nav-logo-sub { display: none; }
+  @media (max-width: 960px) {
+    .section-grid-2 { grid-template-columns: 1fr; gap: 40px; }
   }
 
-  .about-text p {
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 1.2rem;
-    font-size: 1rem;
+  #about h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
   }
 
-  .about-text p strong {
-    color: var(--text-primary);
+  #about p {
+    color: rgba(255,255,255,0.55);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    font-size: 15px;
   }
 
-  .about-cards {
+  .about-bullets {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
+    margin: 2rem 0;
   }
 
-  .about-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
+  .about-bullet {
     display: flex;
-    gap: 16px;
     align-items: flex-start;
-    transition: border-color 0.2s, background 0.2s;
+    gap: 12px;
   }
 
-  .about-card:hover {
-    border-color: var(--blue-border);
-    background: var(--bg-card-hover);
+  .about-bullet svg { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; }
+  .about-bullet span { color: rgba(255,255,255,0.65); font-size: 13.5px; }
+
+  .about-visual {
+    position: relative;
+    aspect-ratio: 1/1;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
   }
 
-  .about-card-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--blue-glow);
-    border: 1px solid var(--blue-border);
-    border-radius: 8px;
+  .about-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ── EVENTS ── */
+  #events { background: var(--secondary); }
+
+  .section-head {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 20px;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
-  .about-card-title {
+  .section-head h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .section-head p {
+    color: rgba(255,255,255,0.5);
+    max-width: 28rem;
     font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 4px;
   }
-
-  .about-card-desc {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  /* ── WHAT WE DO / EVENTS ── */
-  #events { background: var(--bg-primary); }
 
   .events-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 48px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
+
+  @media (max-width: 960px) { .events-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .events-grid { grid-template-columns: 1fr; } }
 
   .event-card {
-    background: var(--bg-card);
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 28px;
-    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    border-radius: 4px;
+    padding: 20px;
+    transition: border-color 0.25s, transform 0.25s;
     position: relative;
-    overflow: hidden;
-  }
-
-  .event-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--blue-primary), transparent);
-    opacity: 0;
-    transition: opacity 0.25s;
   }
 
   .event-card:hover {
-    border-color: var(--blue-border);
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--blue-border);
-  }
-
-  .event-card:hover::before { opacity: 1; }
-
-  .event-icon {
-    font-size: 28px;
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  .event-card h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .event-card p {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.7;
-  }
-
-  .event-tag {
-    display: inline-block;
-    background: var(--blue-glow);
-    border: 1px solid var(--blue-border);
-    color: var(--blue-light);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 100px;
-    margin-top: 16px;
-    letter-spacing: 0.5px;
-  }
-
-  /* ── TEAM ── */
-  #team { background: var(--bg-secondary); }
-
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 48px;
-  }
-
-  .team-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 28px 24px;
-    text-align: center;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-
-  .team-card:hover {
-    border-color: var(--blue-border);
+    border-color: rgba(180,96,239,0.3);
     transform: translateY(-3px);
   }
 
-  .team-avatar {
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(135deg, var(--blue-dim), #1a6bbd);
-    border-radius: 50%;
+  .event-card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    background: rgba(180,96,239,0.1);
+    border: 1px solid rgba(180,96,239,0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--blue-light);
-    margin: 0 auto 14px;
-    border: 2px solid var(--blue-border);
+    margin-bottom: 12px;
+    font-size: 18px;
   }
 
-  .team-role {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--blue-primary);
-    margin-bottom: 6px;
-  }
-
-  .team-name {
+  .event-card h3 {
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 600;
+    color: #fff;
     margin-bottom: 6px;
   }
 
-  .team-desc {
+  .event-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.48);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .event-card-meta {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── BENEFITS ── */
+  .benefits-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 2.5rem;
+  }
+
+  .benefits-tab {
     font-size: 12px;
-    color: var(--text-secondary);
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 100px;
+    background: var(--muted);
+    color: rgba(255,255,255,0.55);
+    border: 1px solid var(--border);
+  }
+
+  .benefits-tab.active {
+    background: rgba(180,96,239,0.12);
+    color: #d9b3f7;
+    border-color: rgba(180,96,239,0.3);
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 960px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .benefits-grid { grid-template-columns: 1fr; } }
+
+  .benefit-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    transition: border-color 0.25s;
+  }
+
+  .benefit-card:hover { border-color: rgba(56,217,245,0.3); }
+
+  .benefit-card-icon {
+    width: 32px; height: 32px;
+    border-radius: 4px;
+    background: rgba(56,217,245,0.1);
+    border: 1px solid rgba(56,217,245,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+
+  .benefit-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .benefit-card p {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.48);
     line-height: 1.6;
   }
 
+  .benefit-card-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+    background: rgba(180,96,239,0.12);
+    color: #d9b3f7;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
   /* ── RESOURCES ── */
-  #resources { background: var(--bg-primary); }
+  #resources { background: var(--secondary); }
 
   .resources-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    margin-top: 48px;
   }
 
+  @media (max-width: 960px) { .resources-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .resources-grid { grid-template-columns: 1fr; } }
+
   .resource-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    text-decoration: none;
-    color: inherit;
     display: block;
-    transition: border-color 0.2s, transform 0.2s, background 0.2s;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    text-decoration: none;
+    transition: border-color 0.25s, transform 0.25s;
   }
 
   .resource-card:hover {
-    border-color: var(--blue-border);
-    background: var(--bg-card-hover);
+    border-color: rgba(255,255,255,0.2);
     transform: translateY(-2px);
   }
 
-  .resource-card-icon {
-    font-size: 24px;
-    margin-bottom: 12px;
-  }
+  .resource-card-icon { font-size: 22px; margin-bottom: 12px; }
 
   .resource-card h4 {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
+    color: #fff;
     margin-bottom: 6px;
   }
 
   .resource-card p {
-    font-size: 13px;
-    color: var(--text-secondary);
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.48);
     line-height: 1.6;
+    margin-bottom: 10px;
   }
 
-  .resource-link {
-    display: inline-flex;
+  .resource-card-link {
+    font-size: 11.5px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ── TEAM ── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 960px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .team-grid { grid-template-columns: 1fr; } }
+
+  .team-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  .team-card:hover { border-color: rgba(180,96,239,0.3); transform: translateY(-2px); }
+
+  .team-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--gradient);
+    display: flex;
     align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    color: var(--blue-primary);
-    margin-top: 12px;
-    font-weight: 500;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #16171a;
+    margin: 0 auto 12px;
   }
 
-  /* ── JOIN US ── */
-  #join { background: var(--bg-secondary); }
+  .team-role {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
 
-  .join-inner {
-    max-width: 680px;
-    margin: 0 auto;
+  .team-name { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+  .team-desc { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+  .team-card-open {
+    border-style: dashed;
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  /* ── JOIN ── */
+  #join { background: var(--secondary); }
+
+  .join-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+
+  #join h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  #join .section-desc {
+    color: rgba(255,255,255,0.5);
+    font-size: 15px;
+    margin-bottom: 3rem;
   }
 
   .join-form-wrap {
-    background: var(--bg-card);
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 6px;
     padding: 40px;
-    margin-top: 48px;
+    text-align: left;
   }
 
   .form-row {
@@ -604,111 +671,72 @@
   @media (max-width: 600px) {
     .form-row { grid-template-columns: 1fr; }
     .join-form-wrap { padding: 24px; }
-    .team-grid { grid-template-columns: 1fr 1fr !important; }
   }
 
-  .form-group {
-    margin-bottom: 20px;
-  }
+  .form-group { margin-bottom: 18px; }
 
   .form-group label {
     display: block;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    color: var(--text-secondary);
+    color: rgba(255,255,255,0.5);
     margin-bottom: 8px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
   }
 
   .form-group input,
   .form-group select,
   .form-group textarea {
     width: 100%;
-    background: var(--bg-secondary);
+    background: var(--muted);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 16px;
-    color: var(--text-primary);
+    border-radius: 4px;
+    padding: 11px 14px;
+    color: #fff;
     font-size: 14px;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color 0.2s;
     appearance: none;
   }
 
   .form-group input:focus,
   .form-group select:focus,
   .form-group textarea:focus {
-    border-color: var(--blue-primary);
-    box-shadow: 0 0 0 3px rgba(79,158,248,0.12);
+    border-color: var(--primary);
   }
 
-  .form-group select option {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-  }
+  .form-group select option { background: var(--secondary); color: #fff; }
+  .form-group textarea { resize: vertical; min-height: 90px; }
 
-  .form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-
-  .form-submit {
-    width: 100%;
-    margin-top: 8px;
-    font-size: 15px;
-    padding: 15px;
-    border-radius: 8px;
-  }
+  .form-submit { width: 100%; margin-top: 6px; }
 
   .form-note {
-    font-size: 12px;
-    color: var(--text-muted);
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.35);
     text-align: center;
     margin-top: 16px;
     line-height: 1.6;
   }
 
-  /* ── SUCCESS MESSAGE ── */
-  .form-success {
-    display: none;
-    text-align: center;
-    padding: 40px 20px;
-  }
-
+  .form-success { display: none; text-align: center; padding: 30px 10px; }
   .form-success.visible { display: block; }
+  .form-success-icon { font-size: 40px; margin-bottom: 14px; }
+  .form-success h3 { font-size: 20px; color: #fff; margin-bottom: 8px; }
+  .form-success p { color: rgba(255,255,255,0.5); font-size: 14px; }
 
-  .form-success-icon {
-    font-size: 48px;
-    margin-bottom: 16px;
-  }
-
-  .form-success h3 {
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-
-  .form-success p {
-    color: var(--text-secondary);
-    font-size: 14px;
-  }
-
-  /* ── CONTACT BAR ── */
-  footer {
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border);
-    padding: 0;
-  }
+  /* ── CONTACT BAR / FOOTER ── */
+  footer { border-top: 1px solid var(--border); }
 
   .contact-bar {
-    background: linear-gradient(135deg, rgba(79,158,248,0.08), rgba(24,82,158,0.05));
+    background: rgba(180,96,239,0.05);
     border-bottom: 1px solid var(--border);
-    padding: 28px 2rem;
+    padding: 28px 1.5rem;
   }
 
   .contact-bar-inner {
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -717,102 +745,45 @@
     gap: 20px;
   }
 
-  .contact-bar-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
+  .contact-bar-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .contact-bar-sub { font-size: 13px; color: rgba(255,255,255,0.45); }
 
-  .contact-bar-sub {
-    font-size: 13px;
-    color: var(--text-secondary);
-  }
-
-  .contact-links {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+  .contact-links { display: flex; gap: 10px; flex-wrap: wrap; }
 
   .contact-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--bg-card);
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 18px;
-    color: var(--text-secondary);
+    border-radius: 4px;
+    padding: 9px 16px;
+    color: rgba(255,255,255,0.6);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 500;
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    transition: border-color 0.2s, color 0.2s;
   }
 
-  .contact-link:hover {
-    border-color: var(--blue-border);
-    color: var(--blue-light);
-    background: var(--blue-glow);
-  }
-
-  .contact-link svg {
-    width: 16px;
-    height: 16px;
-    fill: currentColor;
-    flex-shrink: 0;
-  }
+  .contact-link:hover { border-color: rgba(180,96,239,0.3); color: #fff; }
+  .contact-link svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
 
   .footer-bottom {
-    padding: 24px 2rem;
-    max-width: 1100px;
+    padding: 20px 1.5rem;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
   }
 
-  .footer-copy {
-    font-size: 12px;
-    color: var(--text-muted);
-  }
+  .footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.35); }
+  .footer-disclaimer { font-size: 10.5px; color: rgba(255,255,255,0.3); max-width: 440px; text-align: right; line-height: 1.5; }
 
-  .footer-disclaimer {
-    font-size: 11px;
-    color: var(--text-muted);
-    max-width: 480px;
-    text-align: right;
-    line-height: 1.5;
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    width: 48px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--blue-primary), transparent);
-    border-radius: 2px;
-    margin: 16px 0 32px;
-  }
-
-  /* ── MISC ── */
-  .highlight-box {
-    background: var(--blue-glow);
-    border: 1px solid var(--blue-border);
-    border-radius: 10px;
-    padding: 20px 24px;
-    margin-top: 32px;
-  }
-
-  .highlight-box p {
-    font-size: 14px;
-    color: var(--blue-light);
-    line-height: 1.7;
-    margin: 0;
-  }
-
-  .highlight-box p strong {
-    color: #fff;
+  @media (max-width: 700px) {
+    .footer-disclaimer { text-align: left; }
   }
 </style>
 </head>
@@ -820,76 +791,70 @@
 
 <!-- ── NAVIGATION ── -->
 <nav>
-  <a href="#home" class="nav-logo">
-    <div class="nav-logo-icon">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 3h18v2H3V3zm2 4h14v2H5V7zm-2 4h18v2H3v-2zm2 4h14v2H5v-2zm-2 4h18v2H3v-2z" opacity="0"/>
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        <rect x="8" y="8" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="0"/>
-        <path d="M6 4h12v2H6V4zm-2 4h16v2H4V8zm2 4h12v2H6v-2zm-2 4h16v2H4v-2z" opacity="0"/>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm1 4v2h2V7H6zm4 0v2h2V7h-2zm4 0v2h2V7h-2zM6 11v2h2v-2H6zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2zM6 15v2h2v-2H6zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2z"/>
-      </svg>
-    </div>
-    <div>
-      <span class="nav-logo-text">AWS SBG</span>
-      <span class="nav-logo-sub">at Georgia Tech</span>
-    </div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#events">Events</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="#resources">Resources</a></li>
-    <li><a href="#join" class="nav-cta">Join Us</a></li>
-  </ul>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm1 4v2h2V7H6zm4 0v2h2V7h-2zm4 0v2h2V7h-2zM6 11v2h2v-2H6zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2zM6 15v2h2v-2H6zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2z"/></svg>
+      </div>
+      <span class="nav-logo-text">GT AWS Club</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#join" class="nav-cta">Apply to Core Team</a></li>
+    </ul>
+    <button class="nav-mobile-toggle" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
 </nav>
 
 <!-- ── HERO ── -->
-<section id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-
-  <div class="hero-badge">
-    <span class="hero-badge-dot"></span>
-    Now Accepting Members — Fall 2026
-  </div>
-
-  <h1>
-    Build on the Cloud.<br>
-    <span class="hero-gradient-text">Build at Georgia Tech.</span>
-  </h1>
-
-  <p class="hero-sub">
-    AWS Student Builder Group at Georgia Tech is a student-led community where you learn, build, and connect using AWS cloud technologies — from AI to security to business transformation.
-  </p>
-
-  <div class="hero-actions">
-    <a href="#join" class="btn-primary">
-      Join the Group
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-    <a href="#about" class="btn-secondary">
-      Learn More
-    </a>
-  </div>
-
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <span class="hero-stat-num">6+</span>
-      <span class="hero-stat-label">Events per Year</span>
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Official AWS Partner
+      </div>
+      <h1>
+        <span style="color:#fff;">Build on the</span><br>
+        <span class="gradient-text">cloud at GT.</span>
+      </h1>
+      <p class="hero-sub">
+        Georgia Tech's official AWS Student Builder Group — a student-led club teaching cloud skills through hands-on projects, bootcamps, and industry networking. Launching Fall 2026.
+      </p>
+      <div class="hero-actions">
+        <a href="#join" class="btn btn-filled">
+          Apply to Core Team
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="#about" class="btn btn-outline">Learn More</a>
+      </div>
+      <div class="hero-checklist">
+        <div class="hero-checklist-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b460ef" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>Core team applications open this summer — founding roles available</span>
+        </div>
+        <div class="hero-checklist-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38d9f5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>Open to all GT majors and class years at launch</span>
+        </div>
+        <div class="hero-checklist-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#d9b3f7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>Free AWS Skill Builder access and Cloud Quest for all members</span>
+        </div>
+      </div>
     </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">Free</span>
-      <span class="hero-stat-label">AWS Learning Resources</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">Aug '26</span>
-      <span class="hero-stat-label">Launch Date</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">GT</span>
-      <span class="hero-stat-label">Georgia Tech Campus</span>
+    <div class="hero-visual">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&auto=format" alt="GT AWS Club members collaborating">
+      <div class="hero-visual-card">
+        <div class="hero-visual-card-title">Aug 17, 2026</div>
+        <div class="hero-visual-card-sub">Official Launch</div>
+      </div>
     </div>
   </div>
 </section>
@@ -897,122 +862,176 @@
 <!-- ── ABOUT ── -->
 <section id="about">
   <div class="section-inner">
-    <p class="section-label">About Us</p>
-    <h2 class="section-title">Who We Are</h2>
-    <div class="divider"></div>
-
-    <div class="about-grid">
-      <div class="about-text">
+    <div class="section-grid-2">
+      <div>
+        <p class="eyebrow">About the Club</p>
+        <h2>
+          Where Ramblin' Wrecks<br>
+          <span class="gradient-text">build the future.</span>
+        </h2>
         <p>
-          <strong>AWS Student Builder Group at Georgia Tech</strong> is a student-led, student-driven organization focused on learning about the cloud through AWS technologies.
+          Founded in Summer 2026 by Gauri Menon, the GT AWS Student Builder Group is a student-led, student-driven organization focused on learning the cloud through AWS technologies. We cover security, AI, business analytics, business transformation, and the real-world skills employers are actively hiring for.
         </p>
         <p>
-          Our goal is to teach students about the AWS Cloud and its various use cases — including <strong>security, AI, business analytics, and business transformation</strong> — and to demonstrate how the cloud accelerates business outcomes.
+          We give students hands-on experience through bootcamps, building sessions, and industry networking — all centered around AWS tools. We formally launch on August 17, 2026, and we're recruiting our founding core team right now.
         </p>
-        <p>
-          Beyond theory, AWS SBG at GT gives students hands-on experience through projects built in the AWS Cloud, enabling members to develop both technical and business expertise that is currently in high demand in the industry.
-        </p>
-        <p>
-          As part of the global AWS Student Builder Groups program, we are bringing the program's mission to life on Georgia Tech's campus: creating a collaborative learning environment and building community within the AWS Builder Center.
-        </p>
-        <div class="highlight-box">
-          <p>
-            <strong>Launching August 17, 2026</strong> — be one of our founding members and help shape the future of this community at Georgia Tech.
-          </p>
-        </div>
+        <a href="https://aws.amazon.com/training/digital/immersive-learning/" target="_blank" rel="noopener" class="btn btn-outline">
+          AWS Immersive Learning
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="m10 14 11-11"/><path d="M15 3h6v6"/></svg>
+        </a>
       </div>
-
-      <div class="about-cards">
-        <div class="about-card">
-          <div class="about-card-icon">🎓</div>
-          <div>
-            <div class="about-card-title">Learn Cloud Fundamentals</div>
-            <div class="about-card-desc">Access free AWS Skill Builder courses, Cloud Quest, and digital badges — no experience required to get started.</div>
-          </div>
-        </div>
-        <div class="about-card">
-          <div class="about-card-icon">🔨</div>
-          <div>
-            <div class="about-card-title">Build Real Projects</div>
-            <div class="about-card-desc">Hands-on workshops and hackathons where you build actual applications on AWS cloud infrastructure.</div>
-          </div>
-        </div>
-        <div class="about-card">
-          <div class="about-card-icon">🤝</div>
-          <div>
-            <div class="about-card-title">Connect with the Community</div>
-            <div class="about-card-desc">Network with AWS Community Builders, industry professionals, and fellow Georgia Tech students who share your interests.</div>
-          </div>
-        </div>
-        <div class="about-card">
-          <div class="about-card-icon">🏆</div>
-          <div>
-            <div class="about-card-title">Earn Certifications</div>
-            <div class="about-card-desc">Prepare for AWS certifications with structured learning paths, certification exam vouchers, and peer study groups.</div>
-          </div>
-        </div>
-        <div class="about-card">
-          <div class="about-card-icon">🌐</div>
-          <div>
-            <div class="about-card-title">Global Program</div>
-            <div class="about-card-desc">Part of the AWS Student Builder Groups global network — connect with student leaders and builders worldwide.</div>
-          </div>
-        </div>
+      <div class="about-visual">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&h=800&fit=crop&auto=format" alt="GT AWS Student Builder Group">
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── EVENTS ── -->
+<!-- ── EVENTS & PROGRAMS ── -->
 <section id="events">
   <div class="section-inner">
-    <p class="section-label">What We Do</p>
-    <h2 class="section-title">Events &amp; Activities</h2>
-    <div class="divider"></div>
-    <p class="section-desc">We host at least 6 events per year across formats — workshops, panels, hackathons, and bootcamps. All events are welcoming to members of all experience levels.</p>
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Workshops &amp; Events</p>
+        <h2>Events &amp; Programs</h2>
+      </div>
+      <p>Workshops, building sessions with Kiro, networking panels, and tournaments open to all members.</p>
+    </div>
 
     <div class="events-grid">
       <div class="event-card">
-        <span class="event-icon">🛠️</span>
-        <h3>Hands-On Workshops</h3>
-        <p>Build real things using AWS services. From deploying web apps to exploring machine learning with SageMaker — you leave every workshop having built something.</p>
-        <span class="event-tag">Technical</span>
+        <div class="event-card-icon">🎉</div>
+        <h3>Fall Kickoff &amp; General Interest</h3>
+        <p>Our official launch event — meet the founding team, learn what the club is about, and sign up as a general member.</p>
+        <div class="event-card-meta">GT Campus (TBD) · Aug 17, 2026</div>
       </div>
 
       <div class="event-card">
-        <span class="event-icon">🎮</span>
-        <h3>Cloud Quest Sessions</h3>
-        <p>Compete in guided, gamified AWS learning. 12 free hands-on assignments with a competitive leaderboard — perfect for beginners building cloud fundamentals.</p>
-        <span class="event-tag">Beginner Friendly</span>
+        <div class="event-card-icon">🧑‍💻</div>
+        <h3>Core Team Info Session</h3>
+        <p>Learn about founding team roles and how to shape GT's first AWS Student Builder Group from the ground up.</p>
+        <div class="event-card-meta">Klaus Advanced Computing Building</div>
       </div>
 
       <div class="event-card">
-        <span class="event-icon">🤖</span>
-        <h3>AI &amp; Builder Labs</h3>
-        <p>Free labs via skillbuilder.aws covering generative AI, cloud practitioner tracks, and SimuLearn scenario-based simulations — no personal AWS account needed.</p>
-        <span class="event-tag">AI / ML</span>
+        <div class="event-card-icon">⚡</div>
+        <h3>AWS Builder Hackathon</h3>
+        <p>A team-based build competition using real AWS services — open to all members regardless of experience level.</p>
+        <div class="event-card-meta">Coda Building, GT ATDC</div>
       </div>
 
       <div class="event-card">
-        <span class="event-icon">🎤</span>
-        <h3>Panels &amp; Networking</h3>
-        <p>Professional panels with AWS Community Builders and industry guests. Speed networking, AMAs, and themed discussion tables to connect you with your next opportunity.</p>
-        <span class="event-tag">Networking</span>
+        <div class="event-card-icon">🎮</div>
+        <h3>Cloud Quest Bootcamp</h3>
+        <p>Application-focused track covering Cloud Practitioner and Generative AI Practitioner certifications.</p>
+        <div class="event-card-meta">For All Members</div>
       </div>
 
       <div class="event-card">
-        <span class="event-icon">⚡</span>
-        <h3>Hackathons &amp; Tournaments</h3>
-        <p>The AWS Builder Hackathon, Cloud Quest tournament mode, and Card Clash — team-based competitions where you push your skills under pressure and have fun doing it.</p>
-        <span class="event-tag">Competition</span>
+        <div class="event-card-icon">📘</div>
+        <h3>Microcredential Bootcamp</h3>
+        <p>Theory-focused AWS services bootcamp for 3rd/4th year students. Strong pipeline into the core team.</p>
+        <div class="event-card-meta">Core Team Only</div>
       </div>
 
       <div class="event-card">
-        <span class="event-icon">🎓</span>
-        <h3>Certification Bootcamps</h3>
-        <p>Our signature Microcredential and Cloud Quest Bootcamps give you structured preparation for AWS Cloud Practitioner and Generative AI Practitioner certifications.</p>
-        <span class="event-tag">Certification</span>
+        <div class="event-card-icon">🎤</div>
+        <h3>Industry Networking Panel</h3>
+        <p>AWS and tech industry professionals talk cloud careers, certifications, and what skills employers want right now.</p>
+        <div class="event-card-meta">GT Campus (TBD)</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BENEFITS ── -->
+<section id="benefits">
+  <div class="section-inner">
+    <p class="eyebrow">What You Get</p>
+    <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem); font-weight:700; color:#fff; margin-bottom:3rem;">Core Team Benefits</h2>
+
+    <p style="color:rgba(255,255,255,0.5); font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem;">For All Members</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-card-icon">🎓</div>
+        <h4>AWS Skill Builder Access</h4>
+        <p>Free AWS Skill Builder access and Cloud Quest for all members — free learning resources available from day one.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-card-icon">🤝</div>
+        <h4>Community &amp; Network</h4>
+        <p>Connect with peers, upperclassmen, and AWS-aligned professionals through club events and socials.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-card-icon">📈</div>
+        <h4>Leadership Experience</h4>
+        <p>Build real organizational leadership skills: run events, manage a team, and grow a club from zero.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-card-icon">🏷️</div>
+        <h4>Core Roles Open</h4>
+        <p>Founding roles are open now — get in early and help shape the direction of the entire club.</p>
+      </div>
+    </div>
+
+    <p style="color:rgba(255,255,255,0.5); font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem;">Core Team Only</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <span class="benefit-card-badge">Core Team</span>
+        <h4>AWS Program Access</h4>
+        <p>Direct access to AWS program resources, immersive learning products, and early feature access.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-card-badge">Core Team</span>
+        <h4>Certification Exam Vouchers</h4>
+        <p>Core team members unlock AWS certification exam vouchers as the group hits program milestones.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-card-badge">Core Team</span>
+        <h4>Milestone-Based Rewards</h4>
+        <p>The Group Leader and core team members unlock additional AWS program benefits as the club hits milestones.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-card-badge">Core Team</span>
+        <h4>Bootcamp Director / Marketing Director</h4>
+        <p>Open founding roles — own a workstream end-to-end and build a portfolio-worthy leadership story.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AWS RESOURCES ── -->
+<section id="resources">
+  <div class="section-inner">
+    <p class="eyebrow">AWS Resources</p>
+    <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem); font-weight:700; color:#fff; margin-bottom:0.75rem;">Free for every member</h2>
+    <p style="color:rgba(255,255,255,0.5); font-size:14px; max-width:32rem; margin-bottom:3rem;">Free learning resources available to every GT AWS Club member from day one.</p>
+
+    <div class="resources-grid">
+      <a href="https://skillbuilder.aws" target="_blank" rel="noopener" class="resource-card">
+        <div class="resource-card-icon">📚</div>
+        <h4>AWS Skill Builder</h4>
+        <p>Free access to hundreds of AWS courses, digital badges, and learning paths.</p>
+        <span class="resource-card-link">skillbuilder.aws →</span>
+      </a>
+      <a href="https://aws.amazon.com/training/digital/aws-cloud-quest/" target="_blank" rel="noopener" class="resource-card">
+        <div class="resource-card-icon">🎮</div>
+        <h4>Cloud Quest (Free Tier)</h4>
+        <p>Gamified, self-paced learning for Cloud Practitioner and Generative AI Practitioner.</p>
+        <span class="resource-card-link">Learn more →</span>
+      </a>
+      <a href="https://aws.amazon.com/education/awseducate/" target="_blank" rel="noopener" class="resource-card">
+        <div class="resource-card-icon">🏫</div>
+        <h4>AWS Educate</h4>
+        <p>Cloud career resources, content, and credits designed for students.</p>
+        <span class="resource-card-link">Learn more →</span>
+      </a>
+      <a href="https://aws.amazon.com/training/digital/immersive-learning/" target="_blank" rel="noopener" class="resource-card">
+        <div class="resource-card-icon">🥽</div>
+        <h4>AWS Immersive Learning</h4>
+        <p>Game-based and VR/AR learning experiences for hands-on cloud skills.</p>
+        <span class="resource-card-link">Learn more →</span>
+      </a>
     </div>
   </div>
 </section>
@@ -1020,96 +1039,28 @@
 <!-- ── TEAM ── -->
 <section id="team">
   <div class="section-inner">
-    <p class="section-label">Leadership</p>
-    <h2 class="section-title">Our Core Team</h2>
-    <div class="divider"></div>
-    <p class="section-desc">AWS SBG at GT is run by a dedicated team of Georgia Tech students. Interested in a leadership role? Apply through the Join Us form.</p>
+    <p class="eyebrow">Leadership</p>
+    <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem); font-weight:700; color:#fff; margin-bottom:0.75rem;">Founding Core Team</h2>
+    <p style="color:rgba(255,255,255,0.5); font-size:14px; max-width:32rem; margin-bottom:3rem;">Open to all GT majors and class years at launch — apply for a core team role below.</p>
 
     <div class="team-grid">
       <div class="team-card">
         <div class="team-avatar">GM</div>
-        <div class="team-role">Leader</div>
+        <div class="team-role">Group Leader</div>
         <div class="team-name">Gauri Menon</div>
-        <div class="team-desc">AWS Student Builder Group Leader 2026–2027. Primary AWS contact, presides over all group activities.</div>
+        <div class="team-desc">CS, 3rd year — founded the club Summer 2026 and serves as primary AWS contact.</div>
       </div>
-      <div class="team-card">
-        <div class="team-avatar">—</div>
-        <div class="team-role">Secretary</div>
+      <div class="team-card team-card-open">
+        <div class="team-avatar" style="background:var(--muted); color:rgba(255,255,255,0.4);">?</div>
+        <div class="team-role">Bootcamp Director</div>
         <div class="team-name">Open Role</div>
-        <div class="team-desc">Manages communications, meeting minutes, and membership records.</div>
+        <div class="team-desc">Leads Cloud Quest and Microcredential bootcamp tracks for members.</div>
       </div>
-      <div class="team-card">
-        <div class="team-avatar">—</div>
-        <div class="team-role">Treasurer</div>
-        <div class="team-name">Open Role</div>
-        <div class="team-desc">Manages group finances, dues, and expenditure records.</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">—</div>
-        <div class="team-role">Director of Marketing</div>
+      <div class="team-card team-card-open">
+        <div class="team-avatar" style="background:var(--muted); color:rgba(255,255,255,0.4);">?</div>
+        <div class="team-role">Marketing Director</div>
         <div class="team-name">Open Role</div>
         <div class="team-desc">Owns promotional strategy, social media, and brand compliance.</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">—</div>
-        <div class="team-role">Technical Lead I</div>
-        <div class="team-name">Open Role</div>
-        <div class="team-desc">Leads workshops, technical projects, and AWS learning resource coordination.</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">—</div>
-        <div class="team-role">Technical Lead II</div>
-        <div class="team-name">Open Role</div>
-        <div class="team-desc">Leads additional workshop tracks and specialized learning initiatives.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── RESOURCES ── -->
-<section id="resources">
-  <div class="section-inner">
-    <p class="section-label">Member Benefits</p>
-    <h2 class="section-title">Free AWS Resources</h2>
-    <div class="divider"></div>
-    <p class="section-desc">All general members get access to these free AWS learning resources. No credit card, no commitment — just start building.</p>
-
-    <div class="resources-grid">
-      <div class="resource-card">
-        <div class="resource-card-icon">📚</div>
-        <h4>AWS Skill Builder</h4>
-        <p>Hundreds of free on-demand courses covering AWS fundamentals, architecture, security, and more.</p>
-        <span class="resource-link">Free for all members →</span>
-      </div>
-      <div class="resource-card">
-        <div class="resource-card-icon">🎮</div>
-        <h4>Cloud Quest</h4>
-        <p>Free tier includes Cloud Practitioner and Generative AI Practitioner tracks — gamified, self-paced learning.</p>
-        <span class="resource-link">Cloud Practitioner &amp; Gen AI →</span>
-      </div>
-      <div class="resource-card">
-        <div class="resource-card-icon">🏅</div>
-        <h4>Digital Badges</h4>
-        <p>Earn verifiable digital badges as you complete modules and learning paths — share on LinkedIn and your resume.</p>
-        <span class="resource-link">Shareable credentials →</span>
-      </div>
-      <div class="resource-card">
-        <div class="resource-card-icon">🧪</div>
-        <h4>Builder Labs</h4>
-        <p>12 free hands-on labs via Skill Builder. No personal AWS account needed — get real cloud experience risk-free.</p>
-        <span class="resource-link">Hands-on practice →</span>
-      </div>
-      <div class="resource-card">
-        <div class="resource-card-icon">🎲</div>
-        <h4>SimuLearn</h4>
-        <p>25 free scenario-based simulations to practice real-world AWS decision-making and architecture patterns.</p>
-        <span class="resource-link">25 free scenarios →</span>
-      </div>
-      <div class="resource-card">
-        <div class="resource-card-icon">🌐</div>
-        <h4>AWS Builder Center</h4>
-        <p>Your hub for articles, community updates, and connecting with the broader global AWS Builder community.</p>
-        <span class="resource-link">Global community →</span>
       </div>
     </div>
   </div>
@@ -1118,10 +1069,9 @@
 <!-- ── JOIN ── -->
 <section id="join">
   <div class="section-inner join-inner">
-    <p class="section-label">Get Involved</p>
-    <h2 class="section-title">Join AWS SBG at GT</h2>
-    <div class="divider"></div>
-    <p class="section-desc">Whether you're a first-year curious about the cloud or a senior looking to deepen your AWS skills, there's a place for you here.</p>
+    <p class="eyebrow">Apply for a Core Team Role</p>
+    <h2>Apply to Core Team</h2>
+    <p class="section-desc">Core team applications open this summer — founding roles available. Help shape GT's first AWS Student Builder Group from the ground up.</p>
 
     <div class="join-form-wrap">
       <div id="join-form-content">
@@ -1160,17 +1110,16 @@
         </div>
 
         <div class="form-group">
-          <label for="interest">What interests you most?</label>
-          <select id="interest">
-            <option value="" disabled selected>Select an area</option>
-            <option>Cloud Fundamentals &amp; Architecture</option>
-            <option>Artificial Intelligence &amp; Machine Learning</option>
-            <option>Security &amp; Compliance</option>
-            <option>Business Analytics &amp; Data</option>
-            <option>DevOps &amp; Infrastructure</option>
-            <option>Certifications &amp; Career Growth</option>
-            <option>Leadership &amp; Core Team</option>
-            <option>All of the above!</option>
+          <label for="role">Which role interests you?</label>
+          <select id="role">
+            <option value="" disabled selected>Select a role</option>
+            <option>General Member</option>
+            <option>Bootcamp Director</option>
+            <option>Marketing Director</option>
+            <option>Secretary</option>
+            <option>Treasurer</option>
+            <option>Technical Lead</option>
+            <option>Not sure yet — open to anything</option>
           </select>
         </div>
 
@@ -1187,24 +1136,24 @@
 
         <div class="form-group">
           <label for="message">Anything else you'd like us to know? (optional)</label>
-          <textarea id="message" placeholder="I'm excited about AI on AWS and want to contribute to workshops..."></textarea>
+          <textarea id="message" placeholder="I'm excited about AI on AWS and want to help run bootcamps..."></textarea>
         </div>
 
-        <button class="btn-primary form-submit" onclick="submitForm()">
+        <button class="btn btn-filled form-submit" onclick="submitForm()">
           Submit Application
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 5 7 7-7 7"/></svg>
         </button>
 
         <p class="form-note">
           By submitting, you agree to be added to our mailing list for club updates.<br>
-          This group is open to all Georgia Tech students regardless of background.
+          Open to all GT majors and class years at launch.
         </p>
       </div>
 
       <div class="form-success" id="form-success">
         <div class="form-success-icon">🎉</div>
         <h3>You're on the list!</h3>
-        <p>Thanks for your interest in AWS SBG at GT. We'll be in touch before our August 2026 launch with next steps and event details.</p>
+        <p>Thanks for applying to GT AWS Student Builder Group. We'll be in touch as founding roles are filled ahead of our August 17, 2026 launch.</p>
       </div>
     </div>
   </div>
@@ -1216,7 +1165,7 @@
     <div class="contact-bar-inner">
       <div>
         <div class="contact-bar-title">Get in Touch</div>
-        <div class="contact-bar-sub">Questions? Reach out — we'd love to hear from you.</div>
+        <div class="contact-bar-sub">Questions about the club or core team roles? Reach out.</div>
       </div>
       <div class="contact-links">
         <a href="mailto:studentbuilders@amazon.com" class="contact-link">
@@ -1240,10 +1189,9 @@
   </div>
 
   <div class="footer-bottom">
-    <p class="footer-copy">© 2026 AWS Student Builder Group at Georgia Tech · All rights reserved</p>
+    <p class="footer-copy">© 2026 GT AWS Student Builder Group · All rights reserved</p>
     <p class="footer-disclaimer">
-      This group is a student-led organization and is not affiliated with or representing Amazon Web Services, Inc. as an employee group.
-      AWS and Amazon Web Services are trademarks of Amazon.com, Inc.
+      Not officially affiliated with Amazon Web Services, Inc. AWS and Amazon Web Services are trademarks of Amazon.com, Inc.
     </p>
   </div>
 </footer>
@@ -1253,9 +1201,9 @@
     const fname = document.getElementById('fname').value.trim();
     const email = document.getElementById('email').value.trim();
     const year = document.getElementById('year').value;
-    const interest = document.getElementById('interest').value;
+    const role = document.getElementById('role').value;
 
-    if (!fname || !email || !year || !interest) {
+    if (!fname || !email || !year || !role) {
       alert('Please fill in all required fields.');
       return;
     }
@@ -1270,16 +1218,15 @@
   }
 
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
+  const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === '#' + entry.target.id) {
-            link.classList.add('active');
-          }
+          link.style.color = link.getAttribute('href') === '#' + entry.target.id
+            ? '#fff'
+            : 'rgba(255,255,255,0.7)';
         });
       }
     });
