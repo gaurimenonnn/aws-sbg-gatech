@@ -188,16 +188,13 @@
     position: absolute;
     inset: 0;
     background-image: linear-gradient(rgba(255,255,255,0.032) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.032) 1px, transparent 1px);
-    background-size: 24px 24px;
+    background-size: 56px 56px;
   }
 
   .hero-glow-bg {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 20% 50%, rgba(180,96,239,0.1) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 40% at 75% 60%, rgba(56,217,245,0.08) 0%, transparent 55%),
-      radial-gradient(ellipse 30% 30% at 60% 80%, rgba(184,255,62,0.06) 0%, transparent 50%);
+    background: radial-gradient(ellipse 60% 50% at 20% 50%, rgba(180,96,239,0.1) 0%, transparent 60%);
   }
 
   .hero-inner {
@@ -248,48 +245,9 @@
 
   .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
 
-  .staircase { position: relative; display: none; flex-direction: column; align-items: flex-end; gap: 8px; padding: 2rem 1rem 0 0; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%); mask-image: linear-gradient(to right, transparent 0%, black 28%); }
-  @media (min-width: 1024px) { .staircase { display: flex; } }
-  .staircase div { border-radius: 3px; box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
-
-  .hero-stats {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .hero-stats-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-  }
-
-  @media (min-width: 768px) { .hero-stats-inner { grid-template-columns: repeat(4, 1fr); } }
-
-  .hero-stat {
-    padding: 20px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    border-right: 1px solid var(--border);
-  }
-
-  @media (max-width: 767px) { .hero-stat:nth-child(2n) { border-right: none; } }
-  @media (min-width: 768px) { .hero-stat:nth-child(4) { border-right: none; } }
-
-  .hero-stat-val {
-    font-family: var(--mono);
-    font-size: 20px;
-    font-weight: 700;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-stat-label { color: rgba(255,255,255,0.4); font-size: 12px; font-family: var(--mono); }
+  .cloud-graphic { position: relative; display: none; justify-content: flex-end; padding: 2rem 1rem 0 0; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%); mask-image: linear-gradient(to right, transparent 0%, black 28%); }
+  @media (min-width: 1024px) { .cloud-graphic { display: flex; } }
+  .cloud-graphic svg { width: 360px; height: auto; }
 
   /* ── SECTION BASE ── */
   .section-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
@@ -490,28 +448,7 @@
   .join-roles { color: rgba(255,255,255,0.38); font-size: 13.5px; line-height: 1.7; margin-bottom: 2.5rem; }
   .join-roles span { font-family: var(--mono); }
 
-  .join-form { display: flex; flex-direction: column; gap: 12px; max-width: 28rem; margin: 0 auto; }
-  @media (min-width: 600px) { .join-form { flex-direction: row; } }
-
-  .join-form input {
-    flex: 1;
-    padding: 11px 16px;
-    border-radius: 3px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    color: #e8ecf2;
-    font-family: var(--mono);
-    font-size: 12px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .join-form input:focus { border-color: rgba(180,96,239,0.53); }
-
-  .join-note { font-size: 11px; color: rgba(255,255,255,0.2); font-family: var(--mono); margin-top: 1rem; }
-
-  .join-success { display: none; color: var(--lime); font-family: var(--mono); font-size: 13px; margin-top: 1rem; }
-  .join-success.visible { display: block; }
+  .join-note { font-size: 11px; color: rgba(255,255,255,0.2); font-family: var(--mono); margin-top: 1.5rem; }
 
   /* ── FOOTER ── */
   footer { background: #111215; border-top: 1px solid var(--border); padding: 3rem 0; }
@@ -589,7 +526,7 @@
       <a href="#events">Events</a>
       <a href="#team">Team</a>
       <a href="#resources">Resources</a>
-      <a href="#join" class="glow-btn filled">Apply Now</a>
+      <a href="#" class="glow-btn filled apply-cta" target="_blank" rel="noopener">Apply Now</a>
     </nav>
     <button class="nav-mobile-toggle" id="menu-toggle" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -600,7 +537,7 @@
     <a href="#events">Events</a>
     <a href="#team">Team</a>
     <a href="#resources">Resources</a>
-    <a href="#join" class="glow-btn filled" style="width: fit-content;">Apply Now</a>
+    <a href="#" class="glow-btn filled apply-cta" target="_blank" rel="noopener" style="width: fit-content;">Apply Now</a>
   </div>
 </header>
 
@@ -626,7 +563,7 @@
       </p>
 
       <div class="hero-actions">
-        <a href="#join" class="glow-btn filled">
+        <a href="#" class="glow-btn filled apply-cta" target="_blank" rel="noopener">
           Apply to Core Team
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -634,32 +571,20 @@
       </div>
     </div>
 
-    <div class="staircase">
-      <div style="width:220px; height:100px; background:linear-gradient(135deg, #B460EF 0%, #9e78f2 35%, #c4b5fd 100%);"></div>
-      <div style="width:170px; height:80px; background:linear-gradient(135deg, #c4b5fd 0%, #8ab8f8 45%, #38d9f5 100%);"></div>
-      <div style="width:120px; height:80px; background:linear-gradient(135deg, #38d9f5 0%, #72efaa 50%, #b8ff3e 100%);"></div>
-      <div style="width:160px; height:90px; background:linear-gradient(135deg, #b8ff3e 0%, #6ee7cb 50%, #38d9f5 100%);"></div>
-    </div>
-  </div>
-
-  <div class="hero-stats">
-    <div class="hero-stats-inner">
-      <div class="hero-stat">
-        <span class="hero-stat-val" style="background-image: linear-gradient(90deg, #B460EF 0%, #8ab8f8 55%, #38d9f5 100%);">Aug 17</span>
-        <span class="hero-stat-label">Official Launch</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-val" style="background-image: linear-gradient(90deg, #38d9f5, #b8ff3e);">5+</span>
-        <span class="hero-stat-label">Core Roles Open</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-val" style="background-image: linear-gradient(90deg, #c4b5fd, #B460EF);">Free</span>
-        <span class="hero-stat-label">AWS Skill Builder Access</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-val" style="background-image: linear-gradient(90deg, #b8ff3e, #38d9f5);">GT '26</span>
-        <span class="hero-stat-label">Founded This Summer</span>
-      </div>
+    <div class="cloud-graphic">
+      <svg viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#B460EF"/>
+            <stop offset="22%" stop-color="#9e78f2"/>
+            <stop offset="45%" stop-color="#c4b5fd"/>
+            <stop offset="65%" stop-color="#8ab8f8"/>
+            <stop offset="82%" stop-color="#38d9f5"/>
+            <stop offset="100%" stop-color="#b8ff3e"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#cloudGrad)" d="M55 100c-19.3 0-35-15.7-35-35 0-17.6 13-32.2 30-34.6C54.8 16.4 68.6 6 85 6c18.4 0 33.8 12.8 37.8 30 1.4-.3 2.8-.5 4.2-.5 16 0 29 13 29 29 0 16-13 29-29 29H55z"/>
+      </svg>
     </div>
   </div>
 </section>
@@ -671,7 +596,7 @@
       <div>
         <p class="eyebrow" style="color:#B460EF;">About the Club</p>
         <h2>
-          Where Ramblin' Wrecks<br>
+          Where Yellow Jackets<br>
           <span class="gradient-text">build the future.</span>
         </h2>
         <p>
@@ -800,7 +725,7 @@
     <div class="team-grid">
       <div class="team-member-filled">
         <div class="team-photo">
-          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&auto=format" alt="Gauri Menon">
+          <img src="assets/gauri.png" alt="Gauri Menon" style="object-position: top center;">
           <div class="team-photo-overlay" style="background: linear-gradient(to top, #B460EF55, transparent 60%);"></div>
         </div>
         <div class="team-role" style="color:#B460EF;">Group Leader</div>
@@ -808,7 +733,7 @@
         <div class="team-major">CS, 3rd year</div>
       </div>
 
-      <a href="#join" class="team-member-open">
+      <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#38d9f50a; border-color:#38d9f544;">
           <svg viewBox="0 0 24 24" fill="none" stroke="#38d9f588" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>
           <span style="color:#38d9f588;">Apply</span>
@@ -817,7 +742,7 @@
         <div class="team-open-status">Open &middot; Recruiting</div>
       </a>
 
-      <a href="#join" class="team-member-open">
+      <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#c4b5fd0a; border-color:#c4b5fd44;">
           <svg viewBox="0 0 24 24" fill="none" stroke="#c4b5fd88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>
           <span style="color:#c4b5fd88;">Apply</span>
@@ -826,7 +751,7 @@
         <div class="team-open-status">Open &middot; Recruiting</div>
       </a>
 
-      <a href="#join" class="team-member-open">
+      <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#b8ff3e0a; border-color:#b8ff3e44;">
           <svg viewBox="0 0 24 24" fill="none" stroke="#b8ff3e88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>
           <span style="color:#b8ff3e88;">Apply</span>
@@ -835,7 +760,7 @@
         <div class="team-open-status">Open &middot; Recruiting</div>
       </a>
 
-      <a href="#join" class="team-member-open">
+      <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#B460EF0a; border-color:#B460EF44;">
           <svg viewBox="0 0 24 24" fill="none" stroke="#B460EF88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>
           <span style="color:#B460EF88;">Apply</span>
@@ -927,7 +852,7 @@
         </div>
       </div>
       <div style="margin-top:2rem;">
-        <a href="#join" class="glow-btn filled">
+        <a href="#" class="glow-btn filled apply-cta" target="_blank" rel="noopener">
           Apply for a Core Team Role
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -938,7 +863,7 @@
 
 <!-- ── JOIN ── -->
 <section id="join">
-  <div class="hero-grid-bg" style="background-image: linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);"></div>
+  <div class="hero-grid-bg" style="background-image: linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px); background-size: 56px 56px;"></div>
   <div style="position:absolute; inset:0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(180,96,239,0.09) 0%, rgba(56,217,245,0.06) 40%, transparent 70%);"></div>
   <div class="join-top-line"></div>
 
@@ -960,13 +885,12 @@
       <span style="color:#B460EF;">Bootcamp Director</span>
     </p>
 
-    <form class="join-form" id="join-form">
-      <input type="email" id="join-email" placeholder="your.name@gatech.edu" required>
-      <button type="submit" class="glow-btn filled">Apply to Core Team</button>
-    </form>
-    <p class="join-success" id="join-success">Thanks — we'll be in touch ahead of our Aug 17, 2026 launch.</p>
+    <a href="#" class="glow-btn filled apply-cta" target="_blank" rel="noopener">
+      Apply to Core Team
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
 
-    <p class="join-note">GT email required &middot; Roles filled on a rolling basis &middot; Club launches Aug 17, 2026</p>
+    <p class="join-note">Roles filled on a rolling basis &middot; Club launches Aug 17, 2026</p>
   </div>
 </section>
 
@@ -1024,6 +948,11 @@
 </footer>
 
 <script>
+  // TODO: replace with the real application form link
+  const APPLICATION_FORM_URL = "#";
+
+  document.querySelectorAll('.apply-cta').forEach(a => { a.href = APPLICATION_FORM_URL; });
+
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 40);
@@ -1033,14 +962,6 @@
   const mobileMenu = document.getElementById('mobile-menu');
   menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
   mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
-
-  document.getElementById('join-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('join-email').value.trim();
-    if (!email.includes('@')) return;
-    document.getElementById('join-form').style.display = 'none';
-    document.getElementById('join-success').classList.add('visible');
-  });
 </script>
 </body>
 </html>
