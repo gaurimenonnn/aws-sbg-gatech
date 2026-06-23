@@ -267,7 +267,7 @@ section.padded { padding: 6rem 0; }
   margin-bottom: 1.5rem;
 }
 
-#about p { color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.75; margin-bottom: 1rem; font-size: 19px; }
+#about p:not(.eyebrow) { color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.75; margin-bottom: 1rem; font-size: 19px; }
 
 .about-checklist { display: flex; flex-direction: column; gap: 12px; margin-bottom: 2rem; }
 .about-checklist-item { display: flex; align-items: flex-start; gap: 12px; }
@@ -326,7 +326,7 @@ section.padded { padding: 6rem 0; }
 #team { background: var(--bg-alt); }
 
 .team-head { margin-bottom: 3rem; }
-.team-head p { color: rgba(255,255,255,0.45); font-weight: 300; font-size: 18px; max-width: 32rem; margin-top: 0.75rem; }
+.team-head p:not(.eyebrow) { color: rgba(255,255,255,0.45); font-weight: 300; font-size: 18px; max-width: 32rem; margin-top: 0.75rem; }
 
 .team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
 @media (max-width: 960px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -407,7 +407,7 @@ section.padded { padding: 6rem 0; }
 
 .benefits-block { margin-bottom: 4rem; }
 .benefits-block h2 { font-size: clamp(1.6rem, 3vw, 1.9rem); font-weight: 500; color: #fff; margin-bottom: 0.75rem; }
-.benefits-block > p { color: rgba(255,255,255,0.5); font-weight: 300; font-size: 19px; max-width: 36rem; margin-bottom: 2rem; }
+.benefits-block > p:not(.eyebrow) { color: rgba(255,255,255,0.5); font-weight: 300; font-size: 19px; max-width: 36rem; margin-bottom: 2rem; }
 
 .benefits-eyebrow-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
 .exclusive-pill {
