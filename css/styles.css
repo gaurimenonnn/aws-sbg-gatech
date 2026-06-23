@@ -131,6 +131,9 @@ header.scrolled {
   text-decoration: none;
   transition: all 0.25s ease;
   border: 1px solid transparent;
+  /* align the gradient to the border-box so the 1px border doesn't show a
+     clamped, brighter edge ring on the filled (gradient) hover state */
+  background-origin: border-box;
 }
 
 .glow-btn.filled {
@@ -395,8 +398,19 @@ section.padded { padding: 6rem 0; }
   transition: all 0.3s;
 }
 
-.team-open-box img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 7px rgba(0,0,0,0.6)); }
-.team-open-box span { font-size: 16px; font-weight: 300; text-shadow: 0 1px 6px rgba(0,0,0,0.65); }
+/* plus glyph: masked so we can recolor it. Resting = original spot-plus gradient,
+   hover = navy (matches page bg) so it stays visible over the multicolor glow. */
+.team-plus {
+  width: 48px; height: 48px;
+  -webkit-mask: url('../assets/spot-plus.svg') center / contain no-repeat;
+          mask: url('../assets/spot-plus.svg') center / contain no-repeat;
+  background: linear-gradient(135deg, #BC88F2 0%, #FE43D3 45%, #218FEB 90%);
+  transition: background 0.3s ease;
+}
+.team-open-box span { font-size: 16px; font-weight: 300; transition: color 0.3s ease; }
+
+.team-member-open:hover .team-plus { background: var(--bg); }
+.team-member-open:hover .team-open-box span { color: var(--bg) !important; }
 
 .team-open-status { color: rgba(255,255,255,0.4); font-weight: 300; font-size: 17px; }
 
