@@ -74,7 +74,7 @@ header.scrolled {
 
 .nav-brand { display: flex; align-items: center; gap: 12px; }
 .nav-brand img { height: 28px; width: 28px; flex-shrink: 0; }
-.nav-brand-name { color: #fff; font-weight: 500; font-size: 16px; letter-spacing: -0.2px; }
+.nav-brand-name { color: #fff; font-weight: 500; font-size: 18px; letter-spacing: -0.2px; }
 
 .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
 
@@ -185,24 +185,7 @@ header.scrolled {
   pointer-events: none;
 }
 
-/* thin multicolor line border ring (1px gradient outline via mask) */
-.grad-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: var(--grad-multi);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
 .grad-card:hover::before { opacity: 0.85; }
-.grad-card:hover::after  { opacity: 1; }
 
 /* ── HERO ── */
 #hero {
@@ -292,24 +275,20 @@ section.padded { padding: 6rem 0; }
 .about-checklist-item span { color: rgba(255,255,255,0.65); font-weight: 300; font-size: 17.5px; }
 
 .about-visual { position: relative; }
-.about-visual-frame { aspect-ratio: 16/9; border-radius: 3px; overflow: hidden; background: var(--card); position: relative; }
-.about-visual-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.about-visual-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(22,29,38,0.73), transparent); }
-
-.about-floating-card {
-  position: absolute;
-  bottom: -20px; left: -20px;
+.about-visual-frame {
+  aspect-ratio: 16/9;
   border-radius: 3px;
-  padding: 16px;
+  overflow: hidden;
   background: var(--card);
-  border: 1px solid rgba(180,96,239,0.3);
-  box-shadow: 0 0 24px rgba(180,96,239,0.15);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.about-floating-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
-.about-floating-card-top img { height: 24px; width: 24px; }
-.about-floating-card-top span { color: #fff; font-size: 18px; font-weight: 300; }
-.about-floating-card-sub { color: rgba(255,255,255,0.4); font-weight: 300; font-size: 16px; }
+/* toolbox gradient banner sits full-bleed behind Buzz */
+.about-bg-icon { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Buzz, the GT mascot, layered on top */
+.about-buzz { position: relative; z-index: 1; width: 54%; height: auto; filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55)); }
 
 /* ── EVENTS ── */
 #events { background: var(--bg); }
@@ -339,7 +318,7 @@ section.padded { padding: 6rem 0; }
 
 .event-card-date { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.3); }
 
-.event-card h3 { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 8px; flex: 1; }
+.event-card h3 { font-size: 18px; font-weight: 500; color: #fff; margin-bottom: 8px; flex: 1; }
 .event-card p { font-size: 17.5px; font-weight: 300; color: rgba(255,255,255,0.48); line-height: 1.6; }
 .event-card-loc { margin-top: 12px; font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.28); }
 
@@ -398,7 +377,7 @@ section.padded { padding: 6rem 0; }
 .team-member-filled:hover .team-photo-overlay { opacity: 1; }
 
 .team-role { font-size: 16px; font-weight: 300; margin-bottom: 2px; }
-.team-name { color: #fff; font-weight: 500; font-size: 14px; }
+.team-name { color: #fff; font-weight: 500; font-size: 17px; }
 .team-major { color: rgba(255,255,255,0.38); font-weight: 300; font-size: 16px; margin-top: 2px; }
 
 .team-member-open { display: block; text-decoration: none; }
@@ -456,7 +435,7 @@ section.padded { padding: 6rem 0; }
 
 .benefit-icon-box svg { width: 16px; height: 16px; }
 
-.benefit-card h3 { color: #fff; font-weight: 500; font-size: 14px; margin-bottom: 6px; }
+.benefit-card h3 { color: #fff; font-weight: 500; font-size: 17px; margin-bottom: 6px; }
 .benefit-card p { color: rgba(255,255,255,0.48); font-weight: 300; font-size: 16.5px; line-height: 1.6; }
 
 .resources-divider { height: 1px; margin-bottom: 4rem; background: linear-gradient(to right, transparent, rgba(180,96,239,0.33), rgba(56,217,245,0.27), transparent); }
