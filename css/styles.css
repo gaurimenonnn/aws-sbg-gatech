@@ -151,15 +151,13 @@ header.scrolled {
 .glow-btn.outline:hover {
   border-color: rgba(180,96,239,0.45);
   background: rgba(180,96,239,0.08);
-  box-shadow: var(--glow-hover);
 }
 
 .glow-btn svg { width: 14px; height: 14px; }
 
 /* ── GRAD CARD ──
    The card face stays a static blue-gray (var(--card)) at ALL times.
-   On hover: a soft multicolor glow appears ONLY behind the card (::before),
-   plus a thin clean multicolor line border traces the card edge (::after).
+   On hover: a soft multicolor glow appears ONLY behind the card (::before).
    NOTE: the stacking context is established on the GRID (.events-grid /
    .benefits-grid), not on the card, so the negative-z glow paints fully
    behind each card's opaque fill instead of bleeding over it. */
