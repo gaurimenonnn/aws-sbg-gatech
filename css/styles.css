@@ -6,10 +6,10 @@
 /* ── FONTS ── */
 @font-face { font-family: 'Amazon Ember Display'; src: url('../assets/fonts/AmazonEmberDisplay-Light.ttf') format('truetype'); font-weight: 300; font-style: normal; }
 @font-face { font-family: 'Amazon Ember Display'; src: url('../assets/fonts/AmazonEmberDisplay-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; }
-@font-face { font-family: 'Amazon Ember Display'; src: url('../assets/fonts/AmazonEmberDisplay-Medium.ttf') format('truetype'); font-weight: 500 600; font-style: normal; }
-@font-face { font-family: 'Amazon Ember Display'; src: url('../assets/fonts/AmazonEmberDisplay-Heavy.ttf') format('truetype'); font-weight: 700 800; font-style: normal; }
-@font-face { font-family: 'Amazon Ember Mono'; src: url('../assets/fonts/AmazonEmberMono-Regular.ttf') format('truetype'); font-weight: 400 500; font-style: normal; }
-@font-face { font-family: 'Amazon Ember Mono'; src: url('../assets/fonts/AmazonEmberMono-Bold.ttf') format('truetype'); font-weight: 600 700; font-style: normal; }
+@font-face { font-family: 'Amazon Ember Display'; src: url('../assets/fonts/AmazonEmberDisplay-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'Amazon Ember Display'; src: url('../assets/fonts/AmazonEmberDisplay-Heavy.ttf') format('truetype'); font-weight: 700; font-style: normal; }
+@font-face { font-family: 'Amazon Ember Mono'; src: url('../assets/fonts/AmazonEmberMono-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'Amazon Ember Mono'; src: url('../assets/fonts/AmazonEmberMono-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; }
 
 :root {
   --bg: #161D26;
@@ -272,14 +272,14 @@ section.padded { padding: 6rem 0; }
 .about-checklist { display: flex; flex-direction: column; gap: 12px; margin-bottom: 2rem; }
 .about-checklist-item { display: flex; align-items: flex-start; gap: 12px; }
 .about-checklist-item svg { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; }
-.about-checklist-item span { color: rgba(255,255,255,0.65); font-weight: 300; font-size: 17.5px; }
+.about-checklist-item span { color: rgba(255,255,255,0.65); font-weight: 500; font-size: 17.5px; }
 
 .about-visual { position: relative; }
 .about-visual-frame {
   aspect-ratio: 16/9;
   border-radius: 3px;
   overflow: hidden;
-  background: var(--card);
+  background: transparent;
   position: relative;
   display: flex;
   align-items: center;
@@ -454,7 +454,8 @@ section.padded { padding: 6rem 0; }
 #join h2 .white { color: #fff; }
 
 .join-desc { color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.7; margin-bottom: 1rem; font-size: 19px; }
-.join-roles { color: rgba(255,255,255,0.38); font-weight: 300; font-size: 17.5px; line-height: 1.7; margin-bottom: 2.5rem; }
+.join-roles { color: rgba(255,255,255,0.38); font-weight: 500; font-size: 17.5px; line-height: 1.7; margin-bottom: 2.5rem; }
+.join-roles span { font-weight: 300; }
 
 .join-note { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.2); margin-top: 1.5rem; }
 
