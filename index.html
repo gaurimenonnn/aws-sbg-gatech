@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AWS Student Builder Group at Georgia Tech</title>
 <style>
+  @font-face { font-family: 'Amazon Ember Display'; src: url('assets/fonts/AmazonEmberDisplay-Light.ttf') format('truetype'); font-weight: 300; font-style: normal; }
   @font-face { font-family: 'Amazon Ember Display'; src: url('assets/fonts/AmazonEmberDisplay-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; }
   @font-face { font-family: 'Amazon Ember Display'; src: url('assets/fonts/AmazonEmberDisplay-Medium.ttf') format('truetype'); font-weight: 500 600; font-style: normal; }
   @font-face { font-family: 'Amazon Ember Display'; src: url('assets/fonts/AmazonEmberDisplay-Heavy.ttf') format('truetype'); font-weight: 700 800; font-style: normal; }
@@ -33,6 +34,7 @@
 
   body {
     font-family: var(--sans);
+    font-weight: 300;
     background: var(--bg);
     color: #e8ecf2;
     line-height: 1.6;
@@ -74,14 +76,14 @@
 
   .nav-brand { display: flex; align-items: center; gap: 12px; }
   .nav-brand img { height: 28px; width: 28px; flex-shrink: 0; }
-  .nav-brand-name { color: #fff; font-weight: 400; font-size: 14px; letter-spacing: -0.2px; }
+  .nav-brand-name { color: #fff; font-weight: 400; font-size: 16px; letter-spacing: -0.2px; }
 
   .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
 
   .nav-links a {
     color: rgba(255,255,255,0.55);
     text-decoration: none;
-    font-size: 12px;
+    font-size: 14px;
     transition: color 0.2s;
   }
 
@@ -113,7 +115,7 @@
   .mobile-menu a {
     color: rgba(255,255,255,0.6);
     text-decoration: none;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   /* ── GLOW BUTTON ── */
@@ -121,7 +123,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     padding: 10px 20px;
     border-radius: 3px;
@@ -155,51 +157,29 @@
 
   .glow-btn svg { width: 14px; height: 14px; }
 
-  /* ── GRAD CARD (multicolor gradient backlight glow + thin gradient border on hover) ── */
+  /* ── GRAD CARD (soft multicolor backlight glow, halo only — card face never changes) ── */
   .grad-card {
     position: relative;
     border-radius: 3px;
     border: 1px solid var(--border);
     background: var(--card);
-    transition: border-color 0.3s;
     padding: 20px;
-    z-index: 1;
   }
 
   .grad-card::before {
     content: '';
     position: absolute;
-    inset: -3px;
-    border-radius: 6px;
+    inset: 10px;
+    border-radius: 8px;
     background: var(--grad-multi);
-    filter: blur(20px);
+    filter: blur(28px);
     opacity: 0;
     z-index: -1;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.4s ease;
     pointer-events: none;
   }
 
-  .grad-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: var(--grad-multi);
-    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    pointer-events: none;
-  }
-
-  .card-glow:hover, .grad-card:hover {
-    border-color: transparent;
-  }
-
-  .grad-card:hover::before { opacity: 0.6; }
-  .grad-card:hover::after { opacity: 1; }
+  .card-glow:hover::before, .grad-card:hover::before { opacity: 0.5; }
 
   /* ── HERO ── */
   #hero {
@@ -235,7 +215,7 @@
   .hero-inner h1 {
     font-family: var(--mono);
     font-size: clamp(2.4rem, 5vw, 4.25rem);
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.08;
     margin-bottom: 1.5rem;
   }
@@ -273,7 +253,7 @@
   #about h2 {
     font-family: var(--mono);
     font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 700;
+    font-weight: 400;
     color: #fff;
     line-height: 1.25;
     margin-bottom: 1.5rem;
@@ -311,7 +291,7 @@
 
   #events h2, #team h2 {
     font-size: clamp(1.8rem, 3vw, 2.25rem);
-    font-weight: 700;
+    font-weight: 400;
     color: #fff;
   }
 
@@ -349,15 +329,14 @@
   .team-member-filled .team-photo {
     aspect-ratio: 1/1;
     border-radius: 3px;
-    overflow: hidden;
     margin-bottom: 12px;
     position: relative;
     background: var(--card);
-    z-index: 1;
   }
 
   .team-member-filled .team-photo img {
     width: 100%; height: 100%; object-fit: cover; opacity: 0.85;
+    border-radius: 3px;
     transition: transform 0.5s;
   }
 
@@ -367,22 +346,24 @@
   .team-member-open .team-open-box::after {
     content: '';
     position: absolute;
-    inset: -3px;
-    border-radius: 6px;
+    inset: 8px;
+    border-radius: 8px;
     background: var(--grad-multi);
-    filter: blur(20px);
+    filter: blur(22px);
     opacity: 0;
     z-index: -1;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
   }
 
   .team-member-filled:hover .team-photo::after,
   .team-member-open:hover .team-open-box::after {
-    opacity: 0.55;
+    opacity: 0.5;
   }
 
   .team-photo-overlay {
     position: absolute; inset: 0;
+    border-radius: 3px;
     opacity: 0;
     transition: opacity 0.4s;
   }
@@ -397,7 +378,6 @@
 
   .team-open-box {
     position: relative;
-    z-index: 1;
     aspect-ratio: 1/1;
     border-radius: 3px;
     margin-bottom: 12px;
@@ -419,7 +399,7 @@
   #resources { background: var(--bg); }
 
   .benefits-block { margin-bottom: 4rem; }
-  .benefits-block h2 { font-size: clamp(1.6rem, 3vw, 1.9rem); font-weight: 700; color: #fff; margin-bottom: 0.75rem; }
+  .benefits-block h2 { font-size: clamp(1.6rem, 3vw, 1.9rem); font-weight: 400; color: #fff; margin-bottom: 0.75rem; }
   .benefits-block > p { color: rgba(255,255,255,0.5); max-width: 36rem; margin-bottom: 2rem; }
 
   .benefits-eyebrow-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
@@ -462,7 +442,7 @@
   .join-logo { display: flex; justify-content: center; margin-bottom: 1.5rem; }
   .join-logo img { height: 56px; width: 56px; filter: drop-shadow(0 0 24px rgba(180,96,239,0.53)); }
 
-  #join h2 { font-family: var(--mono); font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; margin-bottom: 1rem; }
+  #join h2 { font-family: var(--mono); font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 400; margin-bottom: 1rem; }
   #join h2 .white { color: #fff; }
 
   .join-desc { color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 1rem; font-size: 15px; }
