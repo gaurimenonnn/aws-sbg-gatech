@@ -297,9 +297,10 @@ section.padded { padding: 6rem 0; }
 }
 /* toolbox gradient banner sits full-bleed behind Buzz */
 /* warm + lighten the world icon to match the logo's purple */
-.about-bg-icon { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(1.3) saturate(0.85) hue-rotate(8deg); }
+/* light, cool lavender tone for the world icon */
+.about-bg-icon { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(2.1) saturate(0.55) hue-rotate(-14deg); }
 /* Buzz, the GT mascot, layered on top */
-.about-buzz { position: relative; z-index: 1; width: 54%; height: auto; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.32)); }
+.about-buzz { position: relative; z-index: 1; width: 54%; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.32)); }
 
 /* ── EVENTS ── */
 #events { background: var(--bg); }
@@ -312,9 +313,11 @@ section.padded { padding: 6rem 0; }
 
 .events-head { margin-bottom: 3rem; }
 
-.events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; isolation: isolate; }
+.events-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; isolation: isolate; }
 @media (max-width: 960px) { .events-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .events-grid { grid-template-columns: 1fr; } }
+
+.events-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2.75rem; }
 
 .event-card { display: flex; flex-direction: column; height: 100%; }
 
