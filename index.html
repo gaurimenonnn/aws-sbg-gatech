@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<!-- shared gradient for the team "Apply" plus glyphs -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <linearGradient id="plusGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#BC88F2"/>
+      <stop offset="0.45" stop-color="#FE43D3"/>
+      <stop offset="0.9" stop-color="#218FEB"/>
+    </linearGradient>
+  </defs>
+</svg>
+
 <!-- ── NAV ── -->
 <header id="site-header">
   <div class="nav-inner">
@@ -123,21 +134,19 @@
       <div class="grad-card event-card" style="--accent:#B460EF;">
         <div class="event-card-top">
           <span class="event-card-type" style="background:#B460EF18; border:1px solid #B460EF44; color:#B460EF;"><svg width="13" height="13" viewBox="0 0 5592 3440" fill="#B460EF" style="vertical-align:-2px; margin-right:5px;"><path d="M2150 3440H1720V3010H1290V2580H1720V860H1290V430H1720V0H2150V3440ZM4732 3440H4302V3010H4732V3440ZM3871 3010H3441V2580H3871V3010ZM5162 3010H4732V2150H5162V3010ZM1290 2580H860V2150H1290V2580ZM3011 2580H2581V2150H3011V2580ZM4301 2580H3871V860H4301V2580ZM860 2150H0V1290H860V2150ZM3441 2150H3011V1290H3441V2150ZM5592 2150H5162V1290H5592V2150ZM1290 1290H860V860H1290V1290ZM3010 1290H2580V860H3010V1290ZM5161 1290H4731V430H5161V1290ZM3871 860H3441V430H3871V860ZM4731 430H4301V0H4731V430Z"/></svg>Info Session</span>
-          <span class="event-card-date">Jul 2026</span>
+          <span class="event-card-date">Fall 2026</span>
         </div>
         <h3>Core Team Info Session</h3>
         <p>Learn about founding team roles and how to shape GT's first AWS Student Builder Group from the ground up.</p>
-        <div class="event-card-loc">📍 Virtual · Zoom link on signup</div>
       </div>
 
       <div class="grad-card event-card" style="--accent:#38d9f5;">
         <div class="event-card-top">
           <span class="event-card-type" style="background:#38d9f518; border:1px solid #38d9f544; color:#38d9f5;"><svg width="13" height="13" viewBox="0 0 6880 3870" fill="#38d9f5" style="vertical-align:-2px; margin-right:5px;"><path d="M430 3870H0V3440H430V3870ZM2150 3870H1720V3440H430V3010H2150V3870ZM6450 3010V3440H5160V3870H4730V3010H6450ZM6880 3870H6450V3440H6880V3870ZM2580 3010H2150V2580H2580V3010ZM4730 3010H4300V2580H4730V3010ZM1720 2580H860V2150H1720V2580ZM4300 2580H2580V2150H4300V2580ZM6020 2580H5160V2150H6020V2580ZM860 2150H430V1290H860V2150ZM2150 2150H1720V1290H2150V2150ZM5160 2150H4730V1290H5160V2150ZM6450 2150H6020V1290H6450V2150ZM3870 1720H3010V1290H3870V1720ZM1720 1290H860V860H1720V1290ZM3010 1290H2580V430H3010V1290ZM4300 1290H3870V430H4300V1290ZM6020 1290H5160V860H6020V1290ZM3870 430H3010V0H3870V430Z"/></svg>Kickoff</span>
-          <span class="event-card-date">Aug 17, 2026</span>
+          <span class="event-card-date">Fall 2026</span>
         </div>
         <h3>Fall Kickoff &amp; General Interest</h3>
         <p>Official first meeting, open to all GT students. Club intro, leadership Q&amp;A, and a first look at our bootcamp tracks.</p>
-        <div class="event-card-loc">📍 Klaus Advanced Computing Building</div>
       </div>
 
       <div class="grad-card event-card" style="--accent:#c4b5fd;">
@@ -147,7 +156,6 @@
         </div>
         <h3>Cloud Quest Bootcamp</h3>
         <p>Hands on AWS Cloud Practitioner and Generative AI Practitioner track, ideal for 1st and 2nd year students.</p>
-        <div class="event-card-loc">📍 GT Campus (TBD)</div>
       </div>
 
       <div class="grad-card event-card" style="--accent:#b8ff3e;">
@@ -157,7 +165,6 @@
         </div>
         <h3>Microcredential Bootcamp</h3>
         <p>Theory focused AWS services bootcamp for 3rd/4th year students. Strong pipeline into the core team.</p>
-        <div class="event-card-loc">📍 GT Campus (TBD)</div>
       </div>
 
       <div class="grad-card event-card" style="--accent:#B460EF;">
@@ -167,7 +174,6 @@
         </div>
         <h3>AWS Builder Hackathon</h3>
         <p>Build something real on AWS in a weekend. Open to all members, with prizes and certification opportunities for top teams.</p>
-        <div class="event-card-loc">📍 Coda Building, GT ATDC</div>
       </div>
 
       <div class="grad-card event-card" style="--accent:#38d9f5;">
@@ -177,7 +183,6 @@
         </div>
         <h3>Industry Networking Panel</h3>
         <p>AWS and tech industry professionals talk cloud careers, certifications, and what skills employers want right now.</p>
-        <div class="event-card-loc">📍 GT Campus (TBD)</div>
       </div>
     </div>
   </div>
@@ -205,7 +210,7 @@
 
       <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#38d9f50a; border-color:#38d9f544;">
-          <span class="team-plus" aria-hidden="true"></span>
+          <svg class="team-plus" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4v8h8v4h-8v8h-4v-8H2v-4h8z" fill="url(#plusGrad)"/></svg>
           <span style="color:#38d9f588;">Apply</span>
         </div>
         <div class="team-role" style="color:#38d9f5;">Secretary</div>
@@ -214,7 +219,7 @@
 
       <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#c4b5fd0a; border-color:#c4b5fd44;">
-          <span class="team-plus" aria-hidden="true"></span>
+          <svg class="team-plus" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4v8h8v4h-8v8h-4v-8H2v-4h8z" fill="url(#plusGrad)"/></svg>
           <span style="color:#c4b5fd88;">Apply</span>
         </div>
         <div class="team-role" style="color:#c4b5fd;">Treasurer</div>
@@ -223,7 +228,7 @@
 
       <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#b8ff3e0a; border-color:#b8ff3e44;">
-          <span class="team-plus" aria-hidden="true"></span>
+          <svg class="team-plus" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4v8h8v4h-8v8h-4v-8H2v-4h8z" fill="url(#plusGrad)"/></svg>
           <span style="color:#b8ff3e88;">Apply</span>
         </div>
         <div class="team-role" style="color:#b8ff3e;">Marketing Director</div>
@@ -232,7 +237,7 @@
 
       <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#B460EF0a; border-color:#B460EF44;">
-          <span class="team-plus" aria-hidden="true"></span>
+          <svg class="team-plus" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4v8h8v4h-8v8h-4v-8H2v-4h8z" fill="url(#plusGrad)"/></svg>
           <span style="color:#B460EF88;">Apply</span>
         </div>
         <div class="team-role" style="color:#B460EF;">Bootcamp Director</div>

@@ -125,35 +125,44 @@ header.scrolled {
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
-  padding: 10px 20px;
+  padding: 11px 22px;
   border-radius: 3px;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.25s ease;
-  border: 1px solid transparent;
-  /* align the gradient to the border-box so the 1px border doesn't show a
-     clamped, brighter edge ring on the filled (gradient) hover state */
-  background-origin: border-box;
+  border: none;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
 }
 
+/* filled: the multicolor gradient lives underneath at all times; a solid white
+   layer sits on top and fades out on hover, giving a smooth white -> multicolor
+   reveal. No border, so there is no edge/ring artifact. */
 .glow-btn.filled {
-  background: #fff;
+  background: var(--grad-multi);
   color: #0a0a0e;
 }
-
-.glow-btn.filled:hover {
-  background: var(--grad-multi);
+.glow-btn.filled::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  z-index: -1;
+  transition: opacity 0.35s ease;
 }
+.glow-btn.filled:hover::before { opacity: 0; }
 
+/* outline: 1px inner ring drawn with an inset shadow (does not affect layout,
+   so it matches the filled button's size exactly) */
 .glow-btn.outline {
-  border: 1px solid var(--border);
   color: #fff;
   background: transparent;
+  box-shadow: inset 0 0 0 1px var(--border);
 }
-
 .glow-btn.outline:hover {
-  border-color: rgba(180,96,239,0.45);
   background: rgba(180,96,239,0.08);
+  box-shadow: inset 0 0 0 1px rgba(180,96,239,0.45);
 }
 
 .glow-btn svg { width: 14px; height: 14px; }
@@ -319,9 +328,8 @@ section.padded { padding: 6rem 0; }
 
 .event-card-date { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.3); }
 
-.event-card h3 { font-size: 18px; font-weight: 500; color: #fff; margin-bottom: 8px; flex: 1; }
+.event-card h3 { font-size: 18px; font-weight: 500; color: #fff; margin-bottom: 8px; }
 .event-card p { font-size: 17.5px; font-weight: 300; color: rgba(255,255,255,0.48); line-height: 1.6; }
-.event-card-loc { margin-top: 12px; font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.28); }
 
 /* ── TEAM ── */
 #team { background: var(--bg-alt); }
@@ -398,18 +406,13 @@ section.padded { padding: 6rem 0; }
   transition: all 0.3s;
 }
 
-/* plus glyph: masked so we can recolor it. Resting = original spot-plus gradient,
+/* plus glyph: inline SVG. Resting = original multicolor gradient,
    hover = navy (matches page bg) so it stays visible over the multicolor glow. */
-.team-plus {
-  width: 48px; height: 48px;
-  -webkit-mask: url('../assets/spot-plus.svg') center / contain no-repeat;
-          mask: url('../assets/spot-plus.svg') center / contain no-repeat;
-  background: linear-gradient(135deg, #BC88F2 0%, #FE43D3 45%, #218FEB 90%);
-  transition: background 0.3s ease;
-}
+.team-plus { width: 44px; height: 44px; flex-shrink: 0; }
+.team-plus path { transition: fill 0.3s ease; }
 .team-open-box span { font-size: 16px; font-weight: 300; transition: color 0.3s ease; }
 
-.team-member-open:hover .team-plus { background: var(--bg); }
+.team-member-open:hover .team-plus path { fill: var(--bg); }
 .team-member-open:hover .team-open-box span { color: var(--bg) !important; }
 
 .team-open-status { color: rgba(255,255,255,0.4); font-weight: 300; font-size: 17px; }
