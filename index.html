@@ -74,7 +74,7 @@
 
   .nav-brand { display: flex; align-items: center; gap: 12px; }
   .nav-brand img { height: 28px; width: 28px; flex-shrink: 0; }
-  .nav-brand-name { color: #fff; font-weight: 600; font-size: 14px; font-family: var(--mono); letter-spacing: -0.2px; }
+  .nav-brand-name { color: #fff; font-weight: 400; font-size: 14px; letter-spacing: -0.2px; }
 
   .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
 
@@ -82,7 +82,6 @@
     color: rgba(255,255,255,0.55);
     text-decoration: none;
     font-size: 12px;
-    font-family: var(--mono);
     transition: color 0.2s;
   }
 
@@ -115,7 +114,6 @@
     color: rgba(255,255,255,0.6);
     text-decoration: none;
     font-size: 12px;
-    font-family: var(--mono);
   }
 
   /* ── GLOW BUTTON ── */
@@ -124,8 +122,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    font-weight: 600;
-    font-family: var(--mono);
+    font-weight: 400;
     padding: 10px 20px;
     border-radius: 3px;
     cursor: pointer;
@@ -158,13 +155,13 @@
 
   .glow-btn svg { width: 14px; height: 14px; }
 
-  /* ── GRAD CARD (multicolor gradient backlight glow on hover) ── */
+  /* ── GRAD CARD (multicolor gradient backlight glow + thin gradient border on hover) ── */
   .grad-card {
     position: relative;
     border-radius: 3px;
     border: 1px solid var(--border);
     background: var(--card);
-    transition: background 0.3s, border-color 0.3s;
+    transition: border-color 0.3s;
     padding: 20px;
     z-index: 1;
   }
@@ -179,14 +176,30 @@
     opacity: 0;
     z-index: -1;
     transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  .grad-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--grad-multi);
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
   }
 
   .card-glow:hover, .grad-card:hover {
-    background: var(--card2);
     border-color: transparent;
   }
 
-  .grad-card:hover::before { opacity: 0.55; }
+  .grad-card:hover::before { opacity: 0.6; }
+  .grad-card:hover::after { opacity: 1; }
 
   /* ── HERO ── */
   #hero {
@@ -246,7 +259,6 @@
 
   .eyebrow {
     font-size: 12px;
-    font-family: var(--mono);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 1rem;
@@ -291,14 +303,13 @@
 
   .about-floating-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
   .about-floating-card-top img { height: 24px; width: 24px; }
-  .about-floating-card-top span { color: #fff; font-size: 14px; font-weight: 600; font-family: var(--mono); }
-  .about-floating-card-sub { color: rgba(255,255,255,0.4); font-size: 12px; font-family: var(--mono); }
+  .about-floating-card-top span { color: #fff; font-size: 14px; font-weight: 400; }
+  .about-floating-card-sub { color: rgba(255,255,255,0.4); font-size: 12px; }
 
   /* ── EVENTS ── */
   #events { background: var(--bg); }
 
   #events h2, #team h2 {
-    font-family: var(--mono);
     font-size: clamp(1.8rem, 3vw, 2.25rem);
     font-weight: 700;
     color: #fff;
@@ -316,16 +327,15 @@
 
   .event-card-type {
     font-size: 11px;
-    font-family: var(--mono);
     padding: 2px 8px;
     border-radius: 100px;
   }
 
-  .event-card-date { font-size: 11px; color: rgba(255,255,255,0.3); font-family: var(--mono); }
+  .event-card-date { font-size: 11px; color: rgba(255,255,255,0.3); }
 
-  .event-card h3 { font-family: var(--mono); font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; flex: 1; }
+  .event-card h3 { font-size: 15px; font-weight: 400; color: #fff; margin-bottom: 8px; flex: 1; }
   .event-card p { font-size: 13.5px; color: rgba(255,255,255,0.48); line-height: 1.6; }
-  .event-card-loc { margin-top: 12px; font-size: 11px; color: rgba(255,255,255,0.28); font-family: var(--mono); }
+  .event-card-loc { margin-top: 12px; font-size: 11px; color: rgba(255,255,255,0.28); }
 
   /* ── TEAM ── */
   #team { background: var(--bg-alt); }
@@ -379,8 +389,8 @@
 
   .team-member-filled:hover .team-photo-overlay { opacity: 1; }
 
-  .team-role { font-size: 12px; font-family: var(--mono); margin-bottom: 2px; }
-  .team-name { color: #fff; font-weight: 600; font-size: 14px; font-family: var(--mono); }
+  .team-role { font-size: 12px; margin-bottom: 2px; }
+  .team-name { color: #fff; font-weight: 400; font-size: 14px; }
   .team-major { color: rgba(255,255,255,0.38); font-size: 12px; margin-top: 2px; }
 
   .team-member-open { display: block; text-decoration: none; }
@@ -401,21 +411,20 @@
   }
 
   .team-open-box svg { width: 24px; height: 24px; }
-  .team-open-box span { font-size: 12px; font-family: var(--mono); }
+  .team-open-box span { font-size: 12px; }
 
-  .team-open-status { color: rgba(255,255,255,0.4); font-size: 13px; font-family: var(--mono); }
+  .team-open-status { color: rgba(255,255,255,0.4); font-size: 13px; }
 
   /* ── RESOURCES / BENEFITS ── */
   #resources { background: var(--bg); }
 
   .benefits-block { margin-bottom: 4rem; }
-  .benefits-block h2 { font-family: var(--mono); font-size: clamp(1.6rem, 3vw, 1.9rem); font-weight: 700; color: #fff; margin-bottom: 0.75rem; }
+  .benefits-block h2 { font-size: clamp(1.6rem, 3vw, 1.9rem); font-weight: 700; color: #fff; margin-bottom: 0.75rem; }
   .benefits-block > p { color: rgba(255,255,255,0.5); max-width: 36rem; margin-bottom: 2rem; }
 
   .benefits-eyebrow-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
   .exclusive-pill {
     font-size: 11px;
-    font-family: var(--mono);
     padding: 2px 10px;
     border-radius: 100px;
     background: rgba(180,96,239,0.1);
@@ -438,7 +447,7 @@
 
   .benefit-icon-box svg { width: 16px; height: 16px; }
 
-  .benefit-card h3 { color: #fff; font-weight: 600; font-size: 14px; font-family: var(--mono); margin-bottom: 6px; }
+  .benefit-card h3 { color: #fff; font-weight: 400; font-size: 14px; margin-bottom: 6px; }
   .benefit-card p { color: rgba(255,255,255,0.48); font-size: 12.5px; line-height: 1.6; }
 
   .resources-divider { height: 1px; margin-bottom: 4rem; background: linear-gradient(to right, transparent, rgba(180,96,239,0.33), rgba(56,217,245,0.27), transparent); }
@@ -458,9 +467,9 @@
 
   .join-desc { color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 1rem; font-size: 15px; }
   .join-roles { color: rgba(255,255,255,0.38); font-size: 13.5px; line-height: 1.7; margin-bottom: 2.5rem; }
-  .join-roles span { font-family: var(--mono); }
+  .join-roles span { }
 
-  .join-note { font-size: 11px; color: rgba(255,255,255,0.2); font-family: var(--mono); margin-top: 1.5rem; }
+  .join-note { font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 1.5rem; }
 
   /* ── FOOTER ── */
   footer { background: #12181F; border-top: 1px solid var(--border); padding: 3rem 0; }
@@ -474,7 +483,7 @@
 
   .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
   .footer-brand img { height: 28px; width: 28px; flex-shrink: 0; }
-  .footer-brand span { color: #fff; font-weight: 600; font-size: 14px; font-family: var(--mono); }
+  .footer-brand span { color: #fff; font-weight: 400; font-size: 14px; }
 
   .footer-desc { color: rgba(255,255,255,0.35); font-size: 14px; line-height: 1.7; max-width: 20rem; margin-bottom: 1rem; }
 
@@ -493,14 +502,13 @@
   .footer-social:hover { border-color: rgba(180,96,239,0.4); color: rgba(255,255,255,0.8); background: rgba(180,96,239,0.1); box-shadow: 0 0 10px rgba(180,96,239,0.3); }
   .footer-social svg { width: 14px; height: 14px; }
 
-  .footer-label { font-size: 11px; color: rgba(255,255,255,0.4); font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .footer-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
 
   .footer-link-list { display: flex; flex-direction: column; gap: 10px; }
   .footer-link-list a {
     color: rgba(255,255,255,0.35);
     text-decoration: none;
     font-size: 12px;
-    font-family: var(--mono);
     transition: color 0.2s;
     display: flex;
     align-items: center;
@@ -518,7 +526,6 @@
     flex-wrap: wrap;
     font-size: 11px;
     color: rgba(255,255,255,0.2);
-    font-family: var(--mono);
   }
 </style>
 </head>
@@ -576,7 +583,7 @@
     </div>
 
     <div class="cloud-graphic">
-      <img src="assets/banner-build.svg" alt="AWS SBG build graphic" style="width:100%; max-width:480px; border-radius:4px; display:block;">
+      <img src="assets/code.png" alt="AWS SBG build graphic" style="width:100%; max-width:480px; border-radius:4px; display:block;">
     </div>
   </div>
 </section>
@@ -727,7 +734,7 @@
 
       <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#38d9f50a; border-color:#38d9f544;">
-          <img src="assets/spot-plus.svg" alt="" style="width:26px; height:26px; object-fit:contain;">
+          <img src="assets/spot-plus.svg" alt="" style="width:48px; height:48px; object-fit:contain;">
           <span style="color:#38d9f588;">Apply</span>
         </div>
         <div class="team-role" style="color:#38d9f5;">Secretary</div>
@@ -736,7 +743,7 @@
 
       <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#c4b5fd0a; border-color:#c4b5fd44;">
-          <img src="assets/spot-plus.svg" alt="" style="width:26px; height:26px; object-fit:contain;">
+          <img src="assets/spot-plus.svg" alt="" style="width:48px; height:48px; object-fit:contain;">
           <span style="color:#c4b5fd88;">Apply</span>
         </div>
         <div class="team-role" style="color:#c4b5fd;">Treasurer</div>
@@ -745,7 +752,7 @@
 
       <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#b8ff3e0a; border-color:#b8ff3e44;">
-          <img src="assets/spot-plus.svg" alt="" style="width:26px; height:26px; object-fit:contain;">
+          <img src="assets/spot-plus.svg" alt="" style="width:48px; height:48px; object-fit:contain;">
           <span style="color:#b8ff3e88;">Apply</span>
         </div>
         <div class="team-role" style="color:#b8ff3e;">Marketing Director</div>
@@ -754,7 +761,7 @@
 
       <a href="#" class="team-member-open apply-cta" target="_blank" rel="noopener">
         <div class="team-open-box" style="background:#B460EF0a; border-color:#B460EF44;">
-          <img src="assets/spot-plus.svg" alt="" style="width:26px; height:26px; object-fit:contain;">
+          <img src="assets/spot-plus.svg" alt="" style="width:48px; height:48px; object-fit:contain;">
           <span style="color:#B460EF88;">Apply</span>
         </div>
         <div class="team-role" style="color:#B460EF;">Bootcamp Director</div>
