@@ -296,9 +296,10 @@ section.padded { padding: 6rem 0; }
   justify-content: center;
 }
 /* toolbox gradient banner sits full-bleed behind Buzz */
-.about-bg-icon { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* warm + lighten the world icon to match the logo's purple */
+.about-bg-icon { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(1.3) saturate(0.85) hue-rotate(8deg); }
 /* Buzz, the GT mascot, layered on top */
-.about-buzz { position: relative; z-index: 1; width: 54%; height: auto; filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55)); }
+.about-buzz { position: relative; z-index: 1; width: 54%; height: auto; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.32)); }
 
 /* ── EVENTS ── */
 #events { background: var(--bg); }
@@ -412,8 +413,8 @@ section.padded { padding: 6rem 0; }
 .team-plus path { transition: fill 0.3s ease; }
 .team-open-box span { font-size: 16px; font-weight: 300; transition: color 0.3s ease; }
 
-.team-member-open:hover .team-plus path { fill: var(--bg); }
-.team-member-open:hover .team-open-box span { color: var(--bg) !important; }
+.team-member-open:hover .team-plus path { fill: var(--bg-alt); }
+.team-member-open:hover .team-open-box span { color: var(--bg-alt) !important; }
 
 .team-open-status { color: rgba(255,255,255,0.4); font-weight: 300; font-size: 17px; }
 
