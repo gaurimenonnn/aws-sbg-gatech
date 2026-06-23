@@ -82,7 +82,7 @@ header.scrolled {
   color: rgba(255,255,255,0.55);
   text-decoration: none;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 500;
   transition: color 0.2s;
 }
 
@@ -115,7 +115,7 @@ header.scrolled {
   color: rgba(255,255,255,0.6);
   text-decoration: none;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 /* ── GLOW BUTTON ── */
@@ -140,7 +140,6 @@ header.scrolled {
 
 .glow-btn.filled:hover {
   background: var(--grad-multi);
-  box-shadow: var(--glow-hover);
 }
 
 .glow-btn.outline {
@@ -264,7 +263,7 @@ section.padded { padding: 6rem 0; }
 
 .eyebrow {
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 1rem;
@@ -511,7 +510,7 @@ footer { background: #12181F; border-top: 1px solid var(--border); padding: 3rem
 .footer-social:hover { border-color: rgba(180,96,239,0.4); color: rgba(255,255,255,0.8); background: rgba(180,96,239,0.1); box-shadow: 0 0 10px rgba(180,96,239,0.3); }
 .footer-social svg { width: 14px; height: 14px; }
 
-.footer-label { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+.footer-label { font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
 
 .footer-link-list { display: flex; flex-direction: column; gap: 10px; }
 .footer-link-list a {
