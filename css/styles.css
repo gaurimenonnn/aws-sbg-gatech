@@ -495,6 +495,18 @@ footer { background: #12181F; border-top: 1px solid var(--border); padding: 3rem
 .footer-desc { color: rgba(255,255,255,0.35); font-weight: 300; font-size: 18px; line-height: 1.7; max-width: 20rem; margin-bottom: 1rem; }
 
 .footer-socials { display: flex; gap: 10px; }
+
+.footer-contact { margin-top: 1.5rem; }
+.footer-email {
+  display: inline-block;
+  margin-top: 0.4rem;
+  color: rgba(255,255,255,0.5);
+  font-size: 14px;
+  font-weight: 300;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-email:hover { color: var(--cyan); }
 .footer-social {
   width: 32px; height: 32px;
   border-radius: 3px;
