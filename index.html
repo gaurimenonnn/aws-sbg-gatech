@@ -34,7 +34,7 @@
 
   body {
     font-family: var(--sans);
-    font-weight: 300;
+    font-weight: 400;
     background: var(--bg);
     color: #e8ecf2;
     line-height: 1.6;
@@ -160,6 +160,7 @@
   /* ── GRAD CARD (soft multicolor backlight glow, halo only — card face never changes) ── */
   .grad-card {
     position: relative;
+    isolation: isolate;
     border-radius: 3px;
     border: 1px solid var(--border);
     background: var(--card);
@@ -331,6 +332,7 @@
     border-radius: 3px;
     margin-bottom: 12px;
     position: relative;
+    isolation: isolate;
     background: var(--card);
   }
 
@@ -378,6 +380,7 @@
 
   .team-open-box {
     position: relative;
+    isolation: isolate;
     aspect-ratio: 1/1;
     border-radius: 3px;
     margin-bottom: 12px;
